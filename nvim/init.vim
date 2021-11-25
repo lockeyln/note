@@ -8,6 +8,7 @@ set mouse=
 filetype on "检测文件类型
 set ambiwidth=double "设置为双字宽显示，否则有些符号无法完整显示如：☆
 set clipboard+=unnamed "共享剪贴板
+set cursorline "高亮显示当前行
 
 set tabstop=4
 set shiftwidth=4
@@ -50,9 +51,13 @@ call plug#end()
 let mapleader=","
 nnoremap <leader>ev :e $MYVIMRC<cr> " 打开我的配置文件
 
-set laststatus=2  "永远显示状态栏
-let g:airline#extensions#tabline#enabled = 1 "显示窗口tab和buffer
 let g:airline_theme='molokai' 
+set laststatus=2  "永远显示状态栏
+" 显示窗口tab和buffer
+let g:airline#extensions#tabline#enabled = 1 
+"tabline中buffer显示编号
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
 
 let g:rainbow_active = 1
 let g:rainbow_conf = {
