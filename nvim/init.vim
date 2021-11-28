@@ -1,6 +1,10 @@
 set nocompatible "关闭与vi兼容模式
+filetype on
+filetype plugin on " 允许加载文件类型插件
 set number
-set nowrap
+set relativenumber "设置所在光标行的相对行号
+set wrap"自动换行
+set linebreak
 syntax on
 set showmatch
 set scrolloff=3 "距顶部和底部3行
@@ -9,17 +13,19 @@ filetype on "检测文件类型
 set ambiwidth=double "设置为双字宽显示，否则有些符号无法完整显示如：☆
 set clipboard+=unnamed "共享剪贴板
 set cursorline "高亮显示当前行
+set termguicolors
+set t_Co=256
+colorscheme molokai
 
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab  "将Tab自动转化成空格
-set autoindent
-set smartindent
+set autoindent  "自动与上一行缩进保持一致
+set smartindent 
 set ruler "显示当前行号列号
 set showcmd "在状态栏显示正在输入的命令
 
-colorscheme molokai
 
 
 map <F5> :call RunPython()<CR>
@@ -159,7 +165,7 @@ nmap <silent> gr <Plug>(coc-references)
 " 共用行号
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("nvim-0.5.1") || has("patch-8.1.1564")
+if has("nvim-0.5.0") || has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
