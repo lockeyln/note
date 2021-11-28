@@ -32,3 +32,6 @@
 >
 > 2.到~/.vim/bundle/coc.nvim的文件目录下执行:yarn install
 
+#### neovim无法获取用户输入解决方法
+
+> ​	:te/:terminal 调换出终端单独运行该文件
