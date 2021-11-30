@@ -12,6 +12,7 @@ set mouse=
 filetype on "检测文件类型
 set ambiwidth=double "设置为双字宽显示，否则有些符号无法完整显示如：☆
 set clipboard+=unnamed "共享剪贴板
+set wildmenu "输入命令的时候Tab显示提示
 set cursorline "高亮显示当前行
 set termguicolors
 set t_Co=256
