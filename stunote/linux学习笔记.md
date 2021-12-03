@@ -116,3 +116,8 @@
 > 作为PGP的替代，如今已经有一个开放源代码的类似产品可供使用。GPG（Gnu Privacy Guard），它不包含专利算法，能够无限制的用于商业应用。
 
 ubuntu 2004默认安装GPG
+
+#### 浏览器能访问github，nvim下载不了插件
+
+> git config --global http.sslverify false
+> git config --global https.sslverify false
