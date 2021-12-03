@@ -52,6 +52,8 @@ Plug 'tyru/caw.vim' "自动进行注释
 Plug 'jistr/vim-nerdtree-tabs' " 可以使 nerdtree 的 tab 更加友好些
 Plug 'preservim/tagbar' " 查看当前代码文件中的变量和函数列表的插件
 Plug 'Yggdroot/LeaderF' "模糊查询文件
+Plug 'tpope/vim-surround' 
+Plug 'honza/vim-snippets' "代码片段库
 call plug#end()
 
 " 设置leader键
