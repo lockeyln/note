@@ -58,7 +58,7 @@ call plug#end()
 let mapleader=","
 nnoremap <leader>ev :e $MYVIMRC<cr> " 打开我的配置文件
 
-let g:airline_theme='molokai' 
+let g:airline_theme='desertink' 
 set laststatus=2  "永远显示状态栏
 " 显示窗口tab和buffer
 let g:airline#extensions#tabline#enabled = 1 
@@ -126,86 +126,105 @@ let g:tagbar_ctags_bin='/usr/bin/ctags'
 let g:tagbar_width=30
 
 " 管理coc.nvim插件
-let g:coc_global_extensions=['coc-json', 'coc-vimlsp', 'coc-marketplace']
-" 设置coc
-" 允许未保存文件时跳转文件
+"let g:coc_global_extensions=['coc-json', 'coc-vimlsp', 'coc-marketplace']
+
+"coc默认设置
+
+" if hidden is not set, TextEdit might fail.
 set hidden
-" 增加响应
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+ 
+" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=100
-" 让弹窗栏更加简洁
+ 
+" don't give |ins-completion-menu| messages.
 set shortmess+=c
-" 让我们的tab作为切换扩展的按键
+ 
+" always show signcolumns
+set signcolumn=yes
+ 
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
+ 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-" 按下ctrl+space键跳出或关闭自动补全
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-" 当使用enter键作为补全选择时，它将不会自动切换到下一行
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-" 使用[g或者]g来查找上一个或者下一个代码报错
+ 
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+ 
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+ 
+" Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" 使用gd来跳转到函数定义处、gy获取类型定义，
+" Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-" 共用行号
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
-" 通过gh来显示文档
-nnoremap gh :call <SID>show_documentation()<CR>
+ 
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+ 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call CocAction('doHover')
   endif
 endfunction
-" 高亮相同的词汇
+ 
+" Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" 符号重命名
+ 
+" Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
-
-" 格式化插件
+ 
+" Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
+ 
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
+  " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
-" 共用行号
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("nvim-0.5.1") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+ 
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+ 
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+ 
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+ 
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+ 
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+ 
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
