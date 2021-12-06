@@ -54,6 +54,7 @@ Plug 'preservim/tagbar' " 查看当前代码文件中的变量和函数列表的
 Plug 'Yggdroot/LeaderF' "模糊查询文件
 Plug 'tpope/vim-surround' 
 Plug 'honza/vim-snippets' "代码片段库
+Plug 'tell-k/vim-autopep8'
 call plug#end()
 
 " 设置leader键

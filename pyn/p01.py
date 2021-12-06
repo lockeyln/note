@@ -37,14 +37,19 @@ m=(i+j)/2 n=(i-j)/2 要么都是偶数，要么都是奇数
 i与j均是大于等于2的偶数
 i*j=168 j>=2 则1<i<168/2+1
 '''
+# 
+# for i in range(1, 85):
+#     if 168 % i == 0:
+#         j = 168/i
+#         if i > j and (i+j) % 2 == 0 and (i-j) % 2 == 0:
+#             m = (i+j)/2
+#             n = (i-j)/2
+#             x = n*n-100
+#             print(x)
 
-for i in range(1, 85):
-    if 168 % i == 0:
-        j = 168/i
-        if i > j and (i+j) % 2 == 0 and (i-j) % 2 == 0:
-            m = (i+j)/2
-            n = (i-j)/2
-            x = n*n-100
-            print(x)
-
-
+'''
+题目：输入某年某月末日，判断这一天是这一年的第几天?
+'''
+year=int(input('请输入年:\n'))
+month=int(input("请输入月:\n"))
+day=int(input("请输入日：\n"))
