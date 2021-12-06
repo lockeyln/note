@@ -37,6 +37,8 @@ func! RunPython()
 	endif
 endfunc
 
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+
 "vim-plug配置
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/vim-easy-align'
