@@ -50,6 +50,39 @@ i*j=168 j>=2 则1<i<168/2+1
 '''
 题目：输入某年某月末日，判断这一天是这一年的第几天?
 '''
-year = int(input('请输入年:\n'))
-month = int(input("请输入月:\n"))
-day = int(input("请输入日：\n"))
+# year = int(input('请输入年:\n'))
+# month = int(input("请输入月:\n"))
+# day = int(input("请输入日：\n"))
+#
+# months=(0,31,59,90,120,151,181,212,243,273,304,334)
+# sum=0
+# if 0<month<=12:
+#     sum=months[month-1]
+# else:
+#     print('输入错误!')
+# sum+=day
+# leap=0
+# if year%400==0 or year%4==0 and (year%100!=0):
+#     leap=1
+# if leap==1 and month>2:
+#     sum+=1
+# print("今年的第%d天"%(sum))
+
+'''
+题目：输入三个整数xyz，请把这三个数由小到大输出
+'''
+x = int(input("请输入x："))
+y = int(input("请输入y："))
+z = int(input("请输入z："))
+a = [x, y, z]
+# a.sort()
+# for i in a:
+#     print(i)
+
+# 冒泡排序
+for j in range(len(a)-1):
+    for i in range(len(a)-1-j):
+        if a[i] > a[i+1]:
+            a[i], a[i+1] = a[i+1], a[i]
+
+print(a)

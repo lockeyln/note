@@ -63,6 +63,8 @@ call plug#end()
 let mapleader=","
 nnoremap <leader>ev :e $MYVIMRC<cr> " 打开我的配置文件
 
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+
 let g:airline_theme='desertink' 
 set laststatus=2  "永远显示状态栏
 " 显示窗口tab和buffer
@@ -199,8 +201,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
  
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
  
 augroup mygroup
   autocmd!
