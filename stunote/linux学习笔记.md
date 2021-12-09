@@ -121,3 +121,7 @@ ubuntu 2004默认安装GPG
 
 > git config --global http.sslverify false
 > git config --global https.sslverify false
+
+#### linux系统重启不进系统直接进bios
+
+> sudo systemctl reboot --firmware-setup
