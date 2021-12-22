@@ -1,5 +1,5 @@
 set nocompatible "关闭与vi兼容模式
-filetype on
+filetype on "检测文件类型
 filetype plugin on " 允许加载文件类型插件
 set number
 set relativenumber "设置所在光标行的相对行号
@@ -9,7 +9,6 @@ syntax on
 set showmatch
 set scrolloff=3 "距顶部和底部3行
 set mouse=
-filetype on "检测文件类型
 set ambiwidth=double "设置为双字宽显示，否则有些符号无法完整显示如：☆
 set clipboard+=unnamed "共享剪贴板
 set wildmenu "输入命令的时候Tab显示提示
