@@ -125,3 +125,11 @@ ubuntu 2004默认安装GPG
 #### linux系统重启不进系统直接进bios
 
 > sudo systemctl reboot --firmware-setup
+
+#### which 命令
+> 查看该命令的可执行文件的位置
+
+###三种删除软件方式
+> remove – 卸载软件包，会删除软件包而保留软件的配置文件
+  autoremove – 卸载所有自动安装且不再使用的软件包(连带依赖包一起删除)
+  purge – 卸载并清除软件包的配置
