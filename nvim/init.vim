@@ -17,6 +17,7 @@ set cursorline "高亮显示当前行
 set termguicolors
 set t_Co=256
 colorscheme molokai
+"colorscheme tokyodark
 
 set tabstop=4
 set shiftwidth=4
@@ -41,6 +42,7 @@ autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
 "vim-plug配置
 call plug#begin('~/.config/nvim/plugged')
+Plug 'tiagovla/tokyodark.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'neoclide/coc.nvim'
 Plug 'luochen1990/rainbow'
