@@ -16,9 +16,6 @@ set wildmenu "输入命令的时候Tab显示提示
 set cursorline "高亮显示当前行
 set termguicolors
 set t_Co=256
-colorscheme molokai
-"colorscheme tokyodark
-"colorscheme onedark
 
 set tabstop=4
 set shiftwidth=4
@@ -29,7 +26,11 @@ set smartindent
 set ruler "显示当前行号列号
 set showcmd "在状态栏显示正在输入的命令
 
-
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight  
+"colorscheme molokai
+"colorscheme onedark 
 
 map <F5> :call RunPython()<CR>
 func! RunPython()
@@ -43,7 +44,7 @@ autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
 "vim-plug配置
 call plug#begin('~/.config/nvim/plugged')
-Plug 'tiagovla/tokyodark.nvim'
+Plug 'ghifarit53/tokyonight-vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'neoclide/coc.nvim'
 Plug 'luochen1990/rainbow'
