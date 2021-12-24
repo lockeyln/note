@@ -69,5 +69,5 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
     │   ├── surround.lua
     │   ├── telescope.lua
     │   └── which-key.lua
-    └── plugins.lua 
+    └── plugins.lua                        插件安装管理
 ```
