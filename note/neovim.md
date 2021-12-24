@@ -43,3 +43,9 @@
 ![输入图片说明](lsp%E5%9B%BE%E8%A7%A3.jpg)
 Client 专注于页面样式实现， Server 负责提供语言支持，包括常见的自动补全，跳转到定义，查找引用，悬停文档提示等功能。
 而我们所说的 Neovim 内置 LSP 就是 client 端的实现，这样我们就可以链接到和 VSCode 相同的 language servers ，实现高质量的语法补全。
+
+#### 安装步骤
+1.安装nvim-lspconfig
+2.安装对应 language server
+3.配置对应语言 require('lspconfig').xx.setup{…}
+4.:lua print(vim.inspect(vim.lsp.buf_get_clients())) 查看 LSP 连接状态
