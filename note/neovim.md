@@ -49,7 +49,7 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
 2. 安装对应 language server
 3. 配置对应语言 require('lspconfig').xx.setup{…}
 4. :lua print(vim.inspect(vim.lsp.buf_get_clients())) 查看 LSP 连接状态
-
+```
 ├── init.lua                              入口文件，这里负责加载所有lua文件夹里的文件
 └── lua                                   所有 lua 配置文件
     ├── basic.lua                         Neovim 的基础配置
@@ -70,3 +70,4 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
     │   ├── telescope.lua
     │   └── which-key.lua
     └── plugins.lua 
+```
