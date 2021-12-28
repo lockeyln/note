@@ -137,7 +137,7 @@ ubuntu 2004默认安装GPG
 > purge – 卸载并清除软件包的配置
 
 
-####字体安装
+#### 字体安装
 > 字体安装目录 /usr/share/fonts
 ```
 cd /usr/share/fonts/字体存放目录
