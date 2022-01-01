@@ -145,3 +145,4 @@ sudo mkfontscale # 生成核心字体信息
 sudo mkfontdir # 生成字体文件夹
 sudo fc-cache -fv # 刷新系统字体缓存
 ```
+### ubuntu窗口最大化快捷键 Alt+F10
