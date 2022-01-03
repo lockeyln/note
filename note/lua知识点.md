@@ -9,4 +9,5 @@ for _, n in ipairs(t) do
         print(n)
 end
 ```
-##### lua中pcall函数提供了一种安全的环境来运行函数，同时会捕获函数运行时的异常。
+##### pcall函数
+> lua中pcall函数提供了一种安全的环境来运行函数，同时会捕获函数运行时的异常。
