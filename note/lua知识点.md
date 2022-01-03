@@ -10,5 +10,8 @@ for _, n in ipairs(t) do
 end
 ```
 ##### pcall函数
-> lua中pcall函数提供了一种安全的环境来运行函数，同时会捕获函数运行时的异常。
-> pcall接收一个函数和要传递个后者的参数，并执行，执行结果：有错误、无错误；返回值true或者或false, errorinfo
+
+```
+lua中pcall函数提供了一种安全的环境来运行函数，同时会捕获函数运行时的异常。
+pcall接收一个函数和要传递个后者的参数，并执行，执行结果：有错误、无错误；返回值true或者或false, errorinfo
+```
