@@ -10,7 +10,7 @@ set showmatch
 set scrolloff=3 "距顶部和底部3行
 set mouse=
 set ambiwidth=double "设置为双字宽显示，否则有些符号无法完整显示如：☆
-set clipboard+=unnamed "共享剪贴板
+set clipboard+=unnamed "系统剪贴板设置为默认无名寄存器
 set wildmenu "输入命令的时候Tab显示提示
 set cursorline "高亮显示当前行
 set termguicolors
