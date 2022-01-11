@@ -62,8 +62,8 @@ Plug 'honza/vim-snippets' "代码片段库
 Plug 'tell-k/vim-autopep8'
 call plug#end()
 
-" 设置leader键
-let mapleader=","
+" 设置leader键，设置为空格键
+let mapleader=" "
 nnoremap <leader>ev :e $MYVIMRC<cr> " 打开我的配置文件
 
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
