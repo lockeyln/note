@@ -52,16 +52,5 @@ return require('packer').startup({
         -- 安装主题
         use "sainnhe/gruvbox-material"
 
-	end,
-	config = {
-		max_jobs = 16,
-		git = {
-			default_url_format = 'https://hub.fastgit.org/%s'
-		},
-		display = {
-			open_fn = function()
-				return require('packer.util').float({ border = 'single' })
-			end
-		}
-	}
+	end
 })
