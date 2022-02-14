@@ -1,23 +1,18 @@
-#### Neovim配置
+#### Neovim配置文件
 
-> mkdir ~/.config/nvim
->
-> nvim  ~/.config/nvim/init.vim
+> mkdir ~/.config/nvim <br>
+  nvim  ~/.config/nvim/init.vim
 
 #### 安装配色主题
 
-> 1.mkdir ~/.config/nvim/colors
->
-> 2.下载的配色文件如monokai.vim复制到此文件夹
->
-> 3.init.vim中指定主题：colorscheme monokai
+> 1.mkdir ~/.config/nvim/colors <br>
+ 2.下载的配色文件如monokai.vim复制到此文件夹<br>
+ 3.init.vim中指定主题：colorscheme monokai
 
 #### 安装plug.vim
 
-> mkdir ~/.config/nvim/autoload
->
-> init.vim中配置：
->
+> mkdir ~/.config/nvim/autoload <br>
+ init.vim中配置：
 > ```
 > call plug#begin('~/.config/nvim/plugApp') //括号里的路径可以根据实际情况设置
 > Plug 'junegunn/vim-easy-align'
@@ -26,15 +21,13 @@
 
 #### 安装Coc.nvim
 
-> 出现please install dependencies and compile coc .nvim by: yarn install错误解决方法
->
-> 1.npm install -g yarn     安装yarn
->
-> 2.到~/.vim/bundle/coc.nvim的文件目录下执行:yarn install
+> 出现please install dependencies and compile coc .nvim by: yarn install错误解决方法 <br>
+ 1.npm install -g yarn     安装yarn <br>
+ 2.到~/.vim/bundle/coc.nvim的文件目录下执行:yarn install
 
 #### neovim无法获取用户输入解决方法
 
-> ​	:te/:terminal 调出终端单独运行该文件
+> ​:te或:terminal 调出终端单独运行该文件
 ---
 ### lua配置nvim
 #### 什么是 Language Server Protocol ?
