@@ -221,4 +221,10 @@
 | gT 或 :tabprevious 或 :tabp | 切换到上一个标签页 |
 | :tabrewind 或 :tabr 或 :tabfir | 切换到第一个标签页 |
 | :tablast 或 :tab | 切换到最后一个标签页 |
-
+#### 关闭标签页
+| 按键 | 功能 |
+|---|--------------|
+| :tabclose 或 :tabc | 关闭当前标签页 |
+| :-tabc | 关闭上一个标签页 |
+| :+tabc | 关闭下一个标签页 |
+| :tabonly 或 :tabo | 关闭其他标签页 |
