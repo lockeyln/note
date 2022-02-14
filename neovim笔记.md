@@ -21,13 +21,13 @@
 
 #### 安装Coc.nvim
 
-> 出现please install dependencies and compile coc .nvim by: yarn install错误解决方法 <br>
- 1.npm install -g yarn     安装yarn <br>
+> 出现please install dependencies and compile coc.nvim by: yarn install错误解决方法 <br>
+ 1. npm install -g yarn     安装yarn <br>
  2.到~/.vim/bundle/coc.nvim的文件目录下执行:yarn install
 
 #### neovim无法获取用户输入解决方法
 
-> ​:te或:terminal 调出终端单独运行该文件
+​:te或:terminal 调出终端单独运行该文件
 ---
 ### lua配置nvim
 #### 什么是 Language Server Protocol ?
