@@ -1,4 +1,4 @@
-#### Neovim配置文件
+#### Nvim配置文件
 
 > mkdir ~/.config/nvim <br>
   nvim  ~/.config/nvim/init.vim
