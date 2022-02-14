@@ -188,7 +188,7 @@
 |---|--------------|
 | :split 或 :sp 或 Ctrl-w s | 上下分屏 |
 | :vsplit 或 :vs 或 Ctrl-w v | 左右分屏 |
-| :diffsplit 或 :diffs | diff 模式打开一个分屏，后面可以加 <filename> |
+| :diffsplit 或 :diffs | diff 模式打开一个分屏，后面可以加 \<filename\> |
 #### 窗口跳转(window)
 | 按键 | 功能 |
 |---|--------------|
