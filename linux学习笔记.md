@@ -1,80 +1,40 @@
-### linux命令：
+#### 查看磁盘空间：df -h(disk free)
 
-查看磁盘空间：df -h(disk free)
+#### PPA:Personal Package Archives(个人软件包文档)
 
+> 虽然Ubuntu官方软件仓库尽可能囊括所有的开源软件，但仍有很多软件包由于各种原因不能进入官方软件仓库。<br>
+ 为了方便Ubuntu用户使用，[launchpad.net](https://launchpad.net/)提供了个人软件包集，即`PPA`，<br>
+允许用户建立自己的软件仓库，通过Launchpad进行编译并发布为2进制软件包，作为`apt源供其他用户下载和更新
 
+#### 添加PPA命令
+> add-apt-repository ppa:<ppa_name> <br>
+  sudo add-apt-repository ppa:user/ppa-name
 
-###### PPA:Personal Package Archives(个人软件包文档)
-
-> 虽然Ubuntu官方软件仓库尽可能囊括所有的开源软件，但仍有很多软件包由于各种原因不能进入官方软件仓库。
->
-> 为了方便Ubuntu用户使用，[launchpad.net](https://launchpad.net/)提供了个人软件包集，即`PPA`，允许用户建立自己的软件仓库，通过Launchpad进行编译并发布为2进制软件包，作为`apt源供其他用户下载和更新
-
-###### PPA安装命令：add-apt-repository ppa:<ppa_name>
-
-> sudo add-apt-repository ppa:user/ppa-name
-
-
-
-##### vim安装插件vim-plug
-
-> 用户目录下创建.vim文件夹 
->
-> .vim/autoload 文件夹
-
-##### vim调用系统剪贴板
-
+#### vim调用系统剪贴板
 > 插入模式下shift+insert
 
-##### ifconfig命令找不到
-
+#### ifconfig命令找不到
 > apt install net-tools
 
-#### vim设置一键运行python代码
-
-> ```
-> map <F5> :call RunPython()<CR>
-> func! RunPython()
->   ``exec` `"W"
->   ``if` `&filetype == ``'python'
->     ``exec` `"!time python2.7 %"
->   ``endif
-> endfunc
-> ```
-
-###### vim修改主题
-
-> 1.下载主题文件放到colors文件夹
->
-> 2.配置文件添加colorscheme 主题名
-
 #### git同步gitee
+1. 配置git
+> git config --global user.name "用户名" <br>
+  git config --global  user.email "邮件"
 
-> ###### 1.配置git
->
-> ​	git config --global user.name "用户名"
->
-> ​	git config --global  user.email "邮件"
->
-> ###### 2.生成公钥
->
-> ​	ssh-keygen -t rsa -C "your email"
->
-> ###### 3.gitee添加公钥
->
-> ###### 4.测试是否成功
->
-> `ssh -T git@gitee.com`
->
-> ###### 5.初始化本地库
->
-> ​	cd 项目文件夹 
->
-> ​	git init  //初始化本地项目
->
-> ​	git remote add origin <远程仓库地址> //添加远程仓库地址
->
-> ###### 6.更新到远程仓库
+2. 生成公钥
+> ssh-keygen -t rsa -C "your email"
+
+3. gitee添加公钥
+
+4. 测试是否成功
+> ssh -T git@gitee.com
+
+5. 初始化本地库
+> ​cd 项目文件夹  <br>
+  git init  //初始化本地项目 <br>
+​  git remote add origin <远程仓库地址> //添加远程仓库地址
+
+6. 更新到远程仓库
 >
 > > git add .    //指定更新内容    . 表示全部更新，test.txt 表示更新指定文件
 > > git commit -m "更新说明"     //添加提交更新说明
