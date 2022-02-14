@@ -26,8 +26,7 @@
  2.到~/.vim/bundle/coc.nvim的文件目录下执行:yarn install
 
 #### neovim无法获取用户输入解决方法
-
-​:te或:terminal 调出终端单独运行该文件
+> ​:te或:terminal 调出终端单独运行该文件
 ---
 ### lua配置nvim
 #### 什么是 Language Server Protocol ?
