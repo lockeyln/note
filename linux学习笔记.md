@@ -10,6 +10,10 @@
 > add-apt-repository ppa:<ppa_name> <br>
   sudo add-apt-repository ppa:user/ppa-name
 
+#### 删除PPA源
+> cd /etc/apt/sources.list.d <br>
+  sudo rm ppa名
+
 #### vim调用系统剪贴板
 > 插入模式下shift+insert
 
@@ -35,74 +39,47 @@
 ​  git remote add origin <远程仓库地址> //添加远程仓库地址
 
 6. 更新到远程仓库
->
-> > git add .    //指定更新内容    . 表示全部更新，test.txt 表示更新指定文件
-> > git commit -m "更新说明"     //添加提交更新说明
-> > git push origin master            //执行更新操作
+> git add .    //指定更新内容    . 表示全部更新，test.txt 表示更新指定文件 <br>
+  git commit -m "更新说明"       //添加提交更新说明 <br>
+  git push origin master        //执行更新操作
 
 #### 修改git配置
+> 使用 git config -e --global
 
-> 使用 `git config -e --global` 进入进行修改，`Ctrl+X` 保存并退出，使用 git config --list 再进行查看
+#### Yarn
 
-###### Yarn
-
-> Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 ，Yarn 是为了弥补 npm 的一些缺陷而出现的。
-
-#### 删除PPA源
-
-> cd /etc/apt/sources.list.d
->
-> sudo rm ppa名
-
-#### vim安装coc.nvim插件
-
-> " 在.vimrc文件添加
-> Plug 'neoclide/coc.nvim'
+> Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的JS包管理工具 ，Yarn是为了弥补npm 的一些缺陷而出现的。
 
 
-
-> # PGP
->
+#### PGP
 > PGP（Pretty Good Privacy）就是这样一个用来帮助提高安全性的技术。PGP最常用来给电子邮件进行加密、解密以及提供签名，以提高电子邮件交流的安全性。
->
-> # GPG
->
-> GnuPG（简称GPG）是PGP标准的一个免费实现，无论是类UNIX平台还是Windows平台，都可以使用他。GPG能够帮助我们为文件生成签名、管理密码以及验证签名等。
->
-> 加密的一个简单但又实用的任务就是发送加密电子邮件。多年来，为电子邮件进行加密的标准一直是PGP（Pretty Good Privacy）。程序员Phil Zimmermann特别为电子邮件的保密编写的PGP。
->
-> 这个软件非常好用，迅速流传开来，成了许多程序员的必备工具。但是，它是商业软件，不能自由使用。
->
-> 作为PGP的替代，如今已经有一个开放源代码的类似产品可供使用。GPG（Gnu Privacy Guard），它不包含专利算法，能够无限制的用于商业应用。
 
-ubuntu 2004默认安装GPG
+#### GPG
+> GnuPG（简称GPG）是PGP标准的一个免费实现，无论是类UNIX平台还是Windows平台，都可以使用他。GPG能够帮助我们为文件生成签名、管理密码以及验证签名等。<br>
+  加密的一个简单但又实用的任务就是发送加密电子邮件。多年来，为电子邮件进行加密的标准一直是PGP（Pretty Good Privacy）。<br>
+  程序员Phil Zimmermann特别为电子邮件的保密编写的PGP。它是商业软件，不能自由使用。<br>
+  作为PGP的替代，如今已经有一个开放源代码的类似产品可供使用。GPG（Gnu Privacy Guard），它不包含专利算法，能够无限制的用于商业应用。<br>
+  ubuntu 20.04默认安装GPG
+
+
 
 #### 浏览器能访问github，nvim下载不了插件
 
-> git config --global http.sslverify false
-> git config --global https.sslverify false
-
-#### linux系统重启不进系统直接进bios
-
-> sudo systemctl reboot --firmware-setup
+> git config --global http.sslverify false <br>
+  git config --global https.sslverify false
 
 #### which 命令
 > 查看该命令的可执行文件的位置
 
 #### 三种删除软件方式
-> remove – 卸载软件包，删除软件包而保留软件的配置文件
-> 
-> autoremove – 卸载所有自动安装且不再使用的软件包（连带依赖包一起删）
-> 
-> purge – 卸载并清除软件包的配置
+1. remove  卸载软件包，删除软件包而保留软件的配置文件 
+2. autoremove   卸载所有自动安装且不再使用的软件包（连带依赖包一起删）
+3. purge   卸载并清除软件包的配置
 
 
 #### 字体安装
-> 字体安装目录 /usr/share/fonts
-```
-cd /usr/share/fonts/字体存放目录
-sudo mkfontscale # 生成核心字体信息
-sudo mkfontdir # 生成字体文件夹
-sudo fc-cache -fv # 刷新系统字体缓存
-```
-### ubuntu窗口最大化快捷键 Alt+F10
+> 字体安装目录 /usr/share/fonts  <br>
+cd /usr/share/fonts/ #字体存放目录 <br>
+sudo mkfontscale # 生成核心字体信息 <br>
+sudo mkfontdir # 生成字体文件夹 <br>
+sudo fc-cache -fv # 刷新系统字体缓存 <br>
