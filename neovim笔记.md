@@ -64,3 +64,8 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
     │   └── which-key.lua
     └── plugins.lua                        插件安装管理
 ```
+
+#### map按键映射参数
+* <buffer> 映射将只局限于当前缓冲区
+* <silent> 执行键绑定时不在命令行上回显
+* <special> 一般用于定义特殊键怕有副作用的场合
