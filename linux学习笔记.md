@@ -47,7 +47,6 @@
 > 使用 git config -e --global
 
 #### Yarn
-
 > Yarn是由Facebook、Google、Exponent 和 Tilde 联合推出了一个新的JS包管理工具 ，Yarn是为了弥补npm 的一些缺陷而出现的。
 
 
