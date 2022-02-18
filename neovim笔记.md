@@ -74,7 +74,7 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
 - :scriptnames  按加载顺序显示vim启动后所有script
 - :function     查看加载的所有function
 
-### vim系统变量
+### VIM系统变量
 #### :echo $HOME       为VIM HOME目录，对应于Linux上的~目录 
 > Linux上为/home/username/  <br>
   Windows上为C:\Users\username\   
@@ -83,3 +83,9 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
 #### :echo $MYVIMRC 为用户VIMRC文件路径
 > Windows下为\vim\ _vimrc  <br>
   Linux下为~/.vimrc
+
+### VIM环境变量
+#### :set all           查看所有环境变量的设置
+#### :set               查看所有与系统默认不同的环境变量
+#### :set variable?     显示指定环境变量的当前值
+#### :set runtimepath?  显示script搜索路径
