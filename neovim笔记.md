@@ -68,3 +68,18 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
 * \<buffer\> 映射将只局限于当前缓冲区
 * \<silent\> 执行键绑定时不在命令行上回显
 * \<special\> 一般用于定义特殊键怕有副作用的场合
+
+### vim基础命令
+- :version      显示版本及默认vimrc配置文件加载路径
+- :scriptnames  按加载顺序显示vim启动后所有script
+- :function     查看加载的所有function
+
+### vim系统变量
+#### :echo $HOME       为VIM HOME目录，对应于Linux上的~目录 
+> Linux上为/home/username/  <br>
+  Windows上为C:\Users\username\   
+#### :echo $VIM        为VIM被安装的目录
+#### :echo $VIMRUNTIME 为vim.exe程序的目录
+#### :echo $MYVIMRC 为用户VIMRC文件路径
+> Windows下为\vim\ _vimrc  <br>
+  Linux下为~/.vimrc
