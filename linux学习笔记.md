@@ -82,3 +82,8 @@ cd /usr/share/fonts/ #字体存放目录 <br>
 sudo mkfontscale # 生成核心字体信息 <br>
 sudo mkfontdir # 生成字体文件夹 <br>
 sudo fc-cache -fv # 刷新系统字体缓存 <br>
+
+
+#### appimage
+> AppImage的核心思想是一个应用程序 = 一个文件 。每个AppImage都包含应用程序以及应用程序运行所需的所有文件。  
+换句话说，除了操作系统本身的基础组件，Appimage不需要依赖包即可运行。
