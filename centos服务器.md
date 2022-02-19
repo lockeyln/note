@@ -1,3 +1,9 @@
+#### dnf包管理器
+```
+yum install epel-release
+yum install dnf
+```
+
 #### 安装nginx
 ```
 yum install -y nginx
@@ -34,8 +40,4 @@ mysql -umysql -p -h ipaddress(远程服务器地址) -P 3306 # 远程计算机�
 #### 安装php
 ```
 yum install php
-```
-##### dnf包管理器
-```
-yum install epel-release
 ```
