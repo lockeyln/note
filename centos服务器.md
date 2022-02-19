@@ -1,1 +1,14 @@
-### 安装nginx
+#### 安装nginx
+> yum install -y nginx
+```
+# 安装后记得放行防火墙端口
+firewall-cmd --zone=public --add-port=80/tcp --permanent    #增加80端口
+firewall-cmd --zone=public --add-port=3306/tcp --permanent    #增加3306端口，用于数据库
+firewall-cmd --reload    #重载防火墙
+firewall-cmd --query-port=80/tcp    #查看防火墙的80端口状态
+```
+```
+出现firewallID is not running:
+systemctl status firewalld查看firewalld状态，发现当前是dead状态，即防火墙未开启。
+systemctl start firewalld开启防火墙，没有任何提示即开启成功。
+```
