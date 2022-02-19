@@ -1,4 +1,10 @@
-#### dnf包管理器
+#### putty复制粘贴
+```
+复制： 选中内容，ctrl + 鼠标右键。
+粘贴： ctrl + shift + insert 或 鼠标中键
+```
+
+#### dnf包管理器安装
 ```
 yum install epel-release
 yum install dnf
@@ -40,4 +46,7 @@ mysql -umysql -p -h ipaddress(远程服务器地址) -P 3306 # 远程计算机�
 #### 安装php
 ```
 yum install php
+
+dnf install php php-curl php-dom php-exif php-fileinfo php-fpm php-gd php-hash php-json php-mbstring php-mysqli php-openssl php-pcre php-xml libsodium
+
 ```
