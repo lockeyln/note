@@ -23,5 +23,15 @@ systemctl status mariadb # 查看状态
  
 systemctl  enable  mariadb # 开机启动
   
-mysqladmin -uroot  password  'yourpassword' # 设置密码
+mysqladmin -uroot  password  'yourpassword' # 设置root账号密码
+mysql_secure_installation  # 设置root账号密码
+
+mysql -uroot -p  # root账号登陆mysql
+
+mysql -umysql -p -h ipaddress(远程服务器地址) -P 3306 # 远程计算机连接服务器数据库
+```
+
+#### 安装php
+```
+
 ```
