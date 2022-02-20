@@ -6,7 +6,7 @@
 
 #### dnf包管理器安装
 ```
-yum install epel-release
+yum install epel-release  # 安装DNF之前必须先安装并启用epel-release依赖
 yum install dnf
 ```
 
