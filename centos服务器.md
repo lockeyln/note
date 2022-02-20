@@ -36,6 +36,7 @@ systemctl status mariadb # 查看状态
 systemctl  enable  mariadb # 开机启动
   
 mysqladmin -uroot  password  'yourpassword' # 设置root账号密码
+或
 mysql_secure_installation  # 设置root账号密码
 
 mysql -uroot -p  # root账号登陆mysql
