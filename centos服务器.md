@@ -4,10 +4,10 @@
 粘贴： ctrl + shift + insert 或 鼠标中键
 ```
 
-#### dnf包管理器安装
+#### dnf包管理器安装（取代yum）
 ```
 yum install epel-release  # 安装DNF之前必须先安装并启用epel-release依赖
-yum install dnf
+yum install dnf   # 使用 epel-release 依赖中的 YUM 命令来安装 DNF 包
 ```
 
 #### 安装nginx
