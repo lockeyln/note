@@ -180,3 +180,14 @@ vim.cmd(
 )
 ```
 输入 :h event 查看中文文档插件是否生效
+
+```
+除了 PackerSync 命令外，还有一些命令：
+
+PackerCompile：当插件更改后，运行该命令会使更改生效
+PackerClean：删除禁用或未使用的插件
+PackerInstall：清理，然后安装缺少的插件，不更新已有的插件
+PackerUpdate：清理，然后更新已有的插件和安装缺少的插件
+PackerSync：相当与 PackerUpdate 和 PackerCompile 的结合体
+PackerLoad：立即加载某个插件
+```
