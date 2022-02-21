@@ -138,3 +138,53 @@ vim.keybinds.gmap("n", "<ESC>", ":nohlsearch<CR>", vim.keybinds.opts)
 -- 通过 leader cs 切换拼写检查    
 vim.keybinds.gmap("n", "<leader>cs", "<cmd>set spell!<CR>", vim.keybinds.opts)   
 ```
+
+##### 输入法设置  
+如果使用的是fcitx框架直接可以自己写一个函数让 neovim 在退出插入模式时切换到英文输入法。
+打开 lua/basic/config.lua
+```
+-- 自动切换输入法（Fcitx 框架）
+vim.g.FcitxToggleInput = function()
+    local input_status = tonumber(vim.fn.system("fcitx-remote"))
+    if input_status == 2 then
+        vim.fn.system("fcitx-remote -c")
+    end
+end
+​
+vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
+```
+如果是 Windows 或者 Mac 平台，可以搜索 im-select 并安装配置。
+
+##### ftplugin 配置
+不同类型的文件有不同的缩进规则，比如在 Python 中缩进是 4 个空格，而在 Golang 中是 1 个 tab。  
+基础设置时，在 lua/basic/settings.lua 中配置了这样的一个选项
+```
+-- 自动缩进的策略为 plugin
+vim.o.filetype = "plugin"
+```
+接下来需要在 ~/.config/nvim/ftplugin 目录中新建不同语言的缩进规则文件  
+然后根据语言的缩进规则来书写不同的内容，以 go.lua 为例：
+```
+-- 是否将 tab 替换为 space
+vim.bo.expandtab = false
+-- 换行或 >> << 缩进时的 space 数量    
+vim.bo.shiftwidth = 4    
+-- 一个 tab 占用几个 space    
+vim.bo.tabstop = 4    
+-- tab 和 space 的混合，和上面 2 个设置成相同即可    
+vim.bo.softtabstop = 4   
+```
+同理，在 Lua 中的缩进规则是 4 个空格，那么 lua.lua 文件的内容就是下面这样：
+```
+vim.bo.expandtab = true                     
+vim.bo.shiftwidth = 4
+vim.bo.tabstop = 4                     
+vim.bo.softtabstop = 4 
+-- 取消自动注释，当前行是 -- 注释时，按下 CR 或者 o 默认会自动注释下一行，所以这里取消了
+vim.opt_local.formatoptions = vim.opt_local.formatoptions - {"c", "r", "o"}
+```
+除此之外，我们也可以为不同语言设置不同的空格以及回车样式，但是要确保 lua/basic/settings.lua 中的 list 配置项是打开的：
+```
+-- 是否特殊显示空格等字符
+vim.o.list = true
+```
