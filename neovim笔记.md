@@ -92,3 +92,6 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
 
 ### 彩蛋
 #### :smile
+
+### 删除配置和插件
+.config .local .cache
