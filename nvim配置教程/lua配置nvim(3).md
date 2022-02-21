@@ -395,3 +395,21 @@ require("catppuccin").setup(
 -- 应用主题
 vim.cmd([[colorscheme catppuccin]])
 ```
+
+背景透明
+catppuccin 可以让自身和 nvim-tree 的背景都透明，但需要设置 2 个地方。
+1. 在lua/basic/config.lua 文件中自己设置一个选项，统一管理是否需要透明它们
+```
+-- 是否透明背景
+vim.g.background_transparency = true
+```
+2. 修改 lua/conf/cappuccin.lua 中关于 transparent_background 和 transparent_panel 的选项
+```
+transparent_background = vim.g.background_transparency,
+...
+nvimtree = {
+    ...
+    transparent_panel = vim.g.background_transparency,
+}
+```
+将 Gnome-Terminal 修改为透明背景
