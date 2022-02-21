@@ -34,3 +34,27 @@ LSP 以及 DAP 的加持，目前 neovim 的编码体验已经不输于 vscode �
 │   └── lsp/                        # 存放 LSP 相关配置文件
 └── snippet/                        # 存放代码片段相关文件
 ```
+---
+##### 安装neovim
+```
+下载
+cd ~
+wget https://github.com/neovim/neovim/releases/download/v0.6.1/nvim-linux64.tar.gz
+安装
+sudo tar -xvf ~/nvim-linux64.tar.gz -C /usr/local/
+将 neovim 添加至环境变量
+vi ~/.bashrc
+export PATH=/usr/local/nvim-linux64/bin:$PATH
+刷新配置
+source ~/.bashrc
+```
+##### 创建目录
+```
+mkdir -p ~/.config/nvim/{ftplugin,lint,lua,snippet}
+mkdir -p ~/.config/nvim/lua/{basic,conf,dap,lsp}
+touch ~/.config/nvim/init.lua
+touch ~/.config/nvim/lua/basic/config.lua
+touch ~/.config/nvim/lua/basic/keybinds.lua
+touch ~/.config/nvim/lua/basic/plugins.lua
+touch ~/.config/nvim/lua/basic/settings.lua
+```
