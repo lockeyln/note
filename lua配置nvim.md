@@ -18,6 +18,7 @@ LSP 以及 DAP 的加持，目前 neovim 的编码体验已经不输于 vscode �
 - fd 以及 ripgrep （用于 telescope 模糊查找）
 - sed （用于 nvim-spectre 的全局字符串替换）
 
+##### 配置目录
 ```
 ├── init.lua                        # 配置入口文件
 ├── ftplugin/                       # 存放不同文件类型的缩进规则文件
