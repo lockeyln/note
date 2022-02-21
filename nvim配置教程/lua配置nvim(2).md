@@ -188,3 +188,8 @@ vim.opt_local.formatoptions = vim.opt_local.formatoptions - {"c", "r", "o"}
 -- 是否特殊显示空格等字符
 vim.o.list = true
 ```
+比如让 Golang 中的空格表现为 ⋅，回车表现为 ↴，那么就可以在 go.lua 中加入下面 2 行代码：
+```
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
+```
