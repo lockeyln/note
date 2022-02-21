@@ -193,7 +193,7 @@ PackerLoad：立即加载某个插件
 ```
 ---
 #### 插件推荐
-##### 目录树
+##### 目录树推荐
 - nvim-tree
 - chad-tree
 - neo-tree
@@ -316,7 +316,8 @@ neovim 可选的主题非常多，可参照[nvim-treesitter](https://github.com/
 - [catppuccin](https://github.com/catppuccin/nvim)
 - [vscode-dark](https://github.com/tomasiser/vim-code-dark)
 - [kanagawa](https://github.com/rebelot/kanagawa.nvim)
-- [monokai](https://github.com/tanvirtin/monokai.nvim)
+- [monokai](https://github.com/tanvirtin/monokai.nvim)  
+
 catppuccin主题
 ```
 -- 优秀的暗色主题
@@ -413,3 +414,9 @@ nvimtree = {
 }
 ```
 将 Gnome-Terminal 修改为透明背景
+![输入图片说明](../image/%E7%BB%88%E7%AB%AF%E8%83%8C%E6%99%AF%E8%AE%BE%E7%BD%AE%E9%80%8F%E6%98%8E.jpg)
+
+##### 状态栏美化推荐
+- [feline](https://github.com/feline-nvim/feline.nvim)
+- [windline](https://github.com/windwp/windline.nvim)
+- [lualine](https://github.com/nvim-lualine/lualine.nvim)
