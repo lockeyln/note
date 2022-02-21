@@ -311,7 +311,7 @@ vim.keybinds.gmap("n", "<leader>fc", "<cmd>NvimTreeFindFile<CR>", vim.keybinds.o
 ``` 
 nvim-tree 图标显示错误是因为缺少一个需要手动安装的外部依赖 [nerd font](https://www.nerdfonts.com/)。  
 推荐使用 FiraCode，兼容性好并且支持连体字。
-##### 主题美化
+##### 主题美化推荐
 neovim 可选的主题非常多，可参照[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter/wiki/Colorschemes)中推荐的主题
 - [catppuccin](https://github.com/catppuccin/nvim)
 - [vscode-dark](https://github.com/tomasiser/vim-code-dark)
@@ -419,4 +419,207 @@ nvimtree = {
 ##### 状态栏美化推荐
 - [feline](https://github.com/feline-nvim/feline.nvim)
 - [windline](https://github.com/windwp/windline.nvim)
-- [lualine](https://github.com/nvim-lualine/lualine.nvim)
+- [lualine](https://github.com/nvim-lualine/lualine.nvim)  
+其中 windline 的效果最酷炫，它的内置主题可以让状态栏动起来。  
+windline  
+安装
+```
+-- 炫酷的状态栏插件
+use {
+    "windwp/windline.nvim",
+    config = function()
+        -- 插件加载完成后自动运行 lua/conf/windline.lua 文件中的代码
+        require("conf.windline")
+    end
+}
+```
+新建文件 windline.lua 到 lua/conf/ 目录下
+```
+-- https://github.com/windwp/windline.nvim
+-- 更多内置样式，参见：
+-- https://github.com/windwp/windline.nvim/tree/master/lua/wlsample
+​
+local windline = require('windline')
+local effects = require('wlanimation.effects')
+local HSL = require('wlanimation.utils')
+require('wlsample.airline')
+local animation = require('wlanimation')
+​
+local is_run = false
+​
+local function toggle_anim()
+    if is_run then
+        animation.stop_all()
+        is_run = false
+        return
+    end
+    is_run = true
+    local magenta_anim={}
+    local yellow_anim={}
+    local blue_anim = {}
+    local green_anim={}
+    local red_anim = {}
+    local colors = windline.get_colors()
+​
+    if vim.o.background == 'light' then
+        magenta_anim = HSL.rgb_to_hsl(colors.magenta):tints(10,8)
+        yellow_anim = HSL.rgb_to_hsl(colors.yellow):tints(10,8)
+        blue_anim = HSL.rgb_to_hsl(colors.blue):tints(10, 8)
+        green_anim = HSL.rgb_to_hsl(colors.green):tints(10,8)
+        red_anim = HSL.rgb_to_hsl(colors.red):tints(10,8)
+    else
+        -- shades will create array of color from color to black color .I don't need
+        -- black color then I only take 8
+        magenta_anim = HSL.rgb_to_hsl(colors.magenta):shades(10,8)
+        yellow_anim = HSL.rgb_to_hsl(colors.yellow):shades(10, 8)
+        blue_anim = HSL.rgb_to_hsl(colors.blue):shades(10, 8)
+        green_anim = HSL.rgb_to_hsl(colors.green):shades(10, 8)
+        red_anim = HSL.rgb_to_hsl(colors.red):shades(10, 8)
+    end
+​
+    animation.stop_all()
+    animation.animation({
+        data = {
+            { 'magenta_a', effects.list_color(magenta_anim, 3) },
+            { 'magenta_b', effects.list_color(magenta_anim, 2) },
+            { 'magenta_c', effects.list_color(magenta_anim, 1) },
+​
+            { 'yellow_a', effects.list_color(yellow_anim, 3) },
+            { 'yellow_b', effects.list_color(yellow_anim, 2) },
+            { 'yellow_c', effects.list_color(yellow_anim, 1) },
+​
+            { 'blue_a', effects.list_color(blue_anim, 3) },
+            { 'blue_b', effects.list_color(blue_anim, 2) },
+            { 'blue_c', effects.list_color(blue_anim, 1) },
+​
+            { 'green_a', effects.list_color(green_anim, 3) },
+            { 'green_b', effects.list_color(green_anim, 2) },
+            { 'green_c', effects.list_color(green_anim, 1) },
+​
+            { 'red_a', effects.list_color(red_anim, 3) },
+            { 'red_b', effects.list_color(red_anim, 2) },
+            { 'red_c', effects.list_color(red_anim, 1) },
+        },
+​
+        timeout = nil,
+        delay = 200,
+        interval = 150,
+    })
+end
+​
+WindLine.airline_anim_toggle = toggle_anim
+​
+-- make it run on startup
+vim.defer_fn(function()
+    toggle_anim()
+end, 200)
+```
+如果在一个git仓库中，windline状态栏其实也可以显示当前你在哪个分支下。
+但是需要安装额外的一个插件 gitsigns，这个插件不仅可以让 windline 显示更多的内容，还提供了一些额外的操作 。
+```
+-- 为了能让状态栏显示 git 信息，所以这个插件是必须的
+use {
+    "lewis6991/gitsigns.nvim",
+    requires = {
+        -- 依赖于该插件（一款 Lua 开发使用的插件）
+        "nvim-lua/plenary.nvim"
+    },
+    config = function()
+        require("gitsigns").setup()
+    end
+}
+```
+新建文件 gitsigns.lua 到 lua/conf/ 目录下
+```
+-- https://github.com/lewis6991/gitsigns.nvim
+-- TODO: 您也可以绑定一些快捷键位快速查看 git 信息
+-- 参见：https://github.com/lewis6991/gitsigns.nvim/#keymaps
+​
+require("gitsigns").setup(
+    {
+      -- 设置在左侧的行号列中显示的 git 信息
+      signs = {
+        add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+        change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      },
+​
+    }
+)
+```
+
+##### buffer栏美化
+bufferline  
+当开启多个文件时，我们希望 neovim 顶部能拥有不同的标签页，此时就需要使用 [bufferline](https://github.com/akinsho/bufferline.nvim)插件。  
+其它同类型插件：
+- [barbar](https://github.com/romgrk/barbar.nvim)
+- [luatab](https://github.com/alvarosevilla95/luatab.nvim)
+安装
+```
+-- 支持 LSP 状态的 buffer 栏
+use {
+    "akinsho/bufferline.nvim",
+    requires = {
+        "famiu/bufdelete.nvim" -- 删除 buffer 时不影响现有布局
+    },
+    config = function()
+        require("conf.bufferline")
+    end
+}
+```
+新建文件 buffline.lua 到 lua/conf/ 目录下
+```
+-- https://github.com/akinsho/bufferline.nvim
+​
+require("bufferline").setup(
+    {
+        options = {
+            -- 为每个 buffer 都配置一个序数
+            numbers = "ordinal",
+            -- 使用内置 LSP 进行诊断
+            diagnostics = "nvim_lsp",
+            -- 不建议更改图标
+            indicator_icon = "▎",
+            buffer_close_icon = "",
+            modified_icon = "●",
+            close_icon = "",
+            left_trunc_marker = "",
+            right_trunc_marker = "",
+            -- 分割符样式："slant" | "thick" | "thin"
+            -- 如果是透明背景，不推荐使用 slant
+            separator_style = "thin",
+            -- 左侧让出 nvim-tree 的位置
+            offsets = {
+                {
+                    filetype = "NvimTree",
+                    text = "File Explorer",
+                    highlight = "Directory",
+                    text_align = "left"
+                }
+            },
+            -- 显示 LSP 报错图标
+            diagnostics_indicator = function(count, level, diagnostics_dict, context)
+                local s = " "
+                for e, n in pairs(diagnostics_dict) do
+                    local sym = e == "error" and " " or (e == "warning" and " " or "")
+                    s = s .. n .. sym
+                end
+                return s
+            end
+        }
+    }
+)
+​
+-- 关闭当前 buffer，由 bufdelete 插件所提供的方法
+vim.keybinds.gmap("n", "<C-q>", "<cmd>Bdelete!<CR>", vim.keybinds.opts)
+-- 切换上一个缓冲区
+vim.keybinds.gmap("n", "<C-h>", "<cmd>BufferLineCyclePrev<CR>", vim.keybinds.opts)
+-- 切换下一个缓冲区
+vim.keybinds.gmap("n", "<C-l>", "<cmd>BufferLineCycleNext<CR>", vim.keybinds.opts)
+-- 关闭左侧缓冲区
+vim.keybinds.gmap("n", "<leader>bh", "<cmd>BufferLineCloseLeft<CR>", vim.keybinds.opts)
+-- 关闭右侧缓冲区
+vim.keybinds.gmap("n", "<leader>bl", "<cmd>BufferLineCloseRight<CR>", vim.keybinds.opts)
+```
