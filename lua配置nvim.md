@@ -58,3 +58,14 @@ touch ~/.config/nvim/lua/basic/keybinds.lua
 touch ~/.config/nvim/lua/basic/plugins.lua
 touch ~/.config/nvim/lua/basic/settings.lua
 ```
+
+##### init.lua
+```
+-- 加载配置项  
+require("basic.settings")
+require("basic.keybinds")
+require("basic.config")
+require("basic.plugins")
+```
+若想让 neovim 共享系统剪切板，还需要下载一个插件
+> sudo apt install xsel
