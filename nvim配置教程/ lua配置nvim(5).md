@@ -491,7 +491,7 @@ vim.keybinds.gmap("n", "<leader>fo", "<cmd>Telescope oldfiles theme=dropdown<CR>
 -- 查找 marks 标记
 vim.keybinds.gmap("n", "<leader>fm", "<cmd>Telescope marks theme=dropdown<CR>", vim.keybinds.opts)
 ```
-该插件有一些默认按键  
+该插件有一些默认按键，该插件还能自定义外观 
 ```
 <CR> 打开选中的搜索结果
 <Tab> 选中当前的搜索结果，可搭配 <CR> 一次性打开多个
