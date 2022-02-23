@@ -153,7 +153,7 @@ end
 ​
 vim.cmd("autocmd InsertLeave * call FcitxToggleInput()")
 ```
-如果是 Windows 或者 Mac 平台，可以搜索 im-select 并安装配置。
+如果是 Windows 或者 Mac 平台，可以搜索 [im-select](https://github.com/daipeihust/im-select) 并安装配置。
 
 ##### ftplugin 配置
 不同类型的文件有不同的缩进规则，比如在 Python 中缩进是 4 个空格，而在 Golang 中是 1 个 tab。  
