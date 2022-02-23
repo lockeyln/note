@@ -502,3 +502,83 @@ vim.keybinds.gmap("n", "<leader>fm", "<cmd>Telescope marks theme=dropdown<CR>", 
 j     选择下一个项目（普通模式下）
 k     选择上一个项目（普通模式下）
 ```
+
+##### 精美弹窗nvim-notify
+```
+-- 精美弹窗
+use {
+    "rcarriga/nvim-notify",
+    config = function()
+        require("conf.nvim-notify")
+    end
+}
+```
+新建文件 vim-multiple-cursors.lua 到 lua/conf/ 目录下
+```
+-- https://github.com/rcarriga/nvim-notify
+​
+vim.notify = require("notify")
+​
+vim.notify.setup(
+    {
+        -- 动画样式
+        -- fade_in_slide_out
+        -- fade
+        -- slide
+        -- static
+        stages = "fade",
+        -- 超时时间，默认 5s
+        timeout = 2000
+    }
+)
+-- 使用案例：
+-- 信息、级别、标题
+-- 级别有：info、warn、error、debug、trace
+-- 示例：
+-- vim.notify("hello world", "info", {title = "info"})
+​
+-- 显示历史弹窗记录（需安装 telescope 插件）
+vim.keybinds.gmap(
+    "n",
+    "<leader>fn",
+    "<cmd>lua require('telescope').extensions.notify.notify()<CR>",
+    vim.keybinds.opts
+)
+```
+##### todo-comments
+在程序中经常书写 TODO、FIX 等注释标签进行标记是一个很好的习惯。  
+todo-comments 能够高亮你的注释标签，通过和 telescope 插件搭配能够快速的从当前项目中找到注释标签。
+```
+-- todo tree
+use {
+    "folke/todo-comments.nvim",
+    config = function()
+        require("conf.todo-comments")
+    end
+}
+```
+新建文件 todo-comments.lua 到 lua/conf/ 目录下
+```
+-- https://github.com/folke/todo-comments.nvim
+​
+require("todo-comments").setup(
+    {
+        keywords = {
+            -- alt ： 别名
+            FIX = {
+                icon = " ",
+                color = "#DC2626",
+                alt = {"FIXME", "BUG", "FIXIT", "ISSUE", "!"}
+            },
+            TODO = {icon = " ", color = "#10B981"},
+            HACK = {icon = " ", color = "#7C3AED"},
+            WARN = {icon = " ", color = "#FBBF24", alt = {"WARNING", "XXX"}},
+            PERF = {icon = " ", color = "#FC9868", alt = {"OPTIM", "PERFORMANCE", "OPTIMIZE"}},
+            NOTE = {icon = " ", color = "#2563EB", alt = {"INFO"}}
+        }
+    }
+)
+​
+-- 查找 TODO 标签
+vim.keybinds.gmap("n", "<leader>ft", "<cmd>TodoTelescope theme=dropdown<CR>", vim.keybinds.opts)
+```
