@@ -513,7 +513,7 @@ use {
     end
 }
 ```
-新建文件 vim-multiple-cursors.lua 到 lua/conf/ 目录下
+新建文件 nvim-notify.lua 到 lua/conf/ 目录下
 ```
 -- https://github.com/rcarriga/nvim-notify
 ​
