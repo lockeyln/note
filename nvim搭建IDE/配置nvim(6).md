@@ -245,7 +245,7 @@ require("lspsaga").setup(
 - go 进行工作区诊断
 
 
-##### 显示 LSP 进度
+###### 显示 LSP 进度
 在打开 Lua 文件时会等待大概十几秒 LSP 绑定的键位才会生效，这是由于 LSP 功能在启用前要先加载工作区。  
 我们可以安装 [fidget](https://github.com/j-hui/fidget.nvim) 插件来查看 LSP 加载工作区的进度。  
 在 lua/basic/plugins.lua 文件中安装 fidget：
@@ -710,4 +710,134 @@ use {
         require("conf.nvim-treesitter")
     end
 }
+```
+在 lua/conf/ 目录下新建 nvim-treesitter.lua 文件
+```
+-- https://github.com/nvim-treesitter/nvim-treesitter
+-- https://github.com/p00f/nvim-ts-rainbow
+​
+require("nvim-treesitter.configs").setup(
+    {
+        -- 安装的高亮支持来源
+        ensure_installed = "maintained",
+        -- 同步下载高亮支持
+        sync_install = false,
+        -- 高亮相关
+        highlight = {
+            -- 启用高亮支持
+            enable = true,
+            -- 使用 treesitter 高亮而不是 neovim 内置的高亮
+            additional_vim_regex_highlighting = false
+        },
+        -- 范围选择
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                -- 初始化选择
+                init_selection = "<CR>",
+                -- 递增
+                node_incremental = "<CR>",
+                -- 递减
+                node_decremental = "<BS>",
+                -- 选择一个范围
+                scope_incremental = "<TAB>"
+            }
+        },
+        -- 缩进，关闭
+        indent = {
+            enable = false
+        },
+        -- 彩虹括号，由 nvim-ts-rainbow 插件提供
+        rainbow = {
+            enable = true,
+            extended_mode = true
+            -- colors = {}, -- table of hex strings
+            -- termcolors = {} -- table of colour name strings
+        },
+    }
+)
+```
+Ps：最近 nvim-ts-rainbow 插件更新了，在启动 neovim 时会抛出一个异常：
+![nvim-ts-rainbow异常](../image/nvim-ts-rainbow%E5%BC%82%E5%B8%B8.jpg)  
+官方 github 已经有人提供 issuse 了，我也去顶了一下，参见：[点我跳转](https://github.com/p00f/nvim-ts-rainbow/issues/94)。在该问题解决之前，可以先暂时禁用彩虹括号，将 enable 修改为 false，如果放任它不管很可能其它插件就不能正确运行了。
+
+##### 代码注释Comment
+[Comment](https://github.com/numToStr/Comment.nvim) 插件能够提供代码注释的功能，搭配 [nvim-ts-context-commentstring ](https://github.com/JoosepAlviste/nvim-ts-context-commentstring)插件可以做到根据当前光标所在的上下文环境给予不同的代码注释方式。  
+比如在 vue 文件中，template、style、script 这 3 个标签的注释方式都有所不同，只有使用 Comment + nvim-ts-context-commentstring 插件才能提供正确的注释。  
+
+在 lua/basic/plugins.lua 文件中安装这 2 个插件：
+```
+-- 代码注释
+use {
+    "numToStr/Comment.nvim",
+    requires = {
+        "JoosepAlviste/nvim-ts-context-commentstring"
+    },
+    config = function()
+        require("conf.Comment")
+    end
+}
+```
+要想启用 nvim-ts-context-commentstring 插件，需要到 lua/conf/nvim-treesitter.lua 文件里添加上下面的代码：
+```
+-- 根据当前上下文定义文件类型，由 nvim-ts-context-commentstring 插件提供
+context_commentstring = {
+    enable = true
+}
+```
+![nvim-ts-context-commentstring ](../image/nvim-ts-context-commentstring%E6%B7%BB%E5%8A%A0%E4%BD%8D%E7%BD%AE.jpg)  
+然后在 lua/conf/ 目录下创建 Comment.lua 文件
+```
+-- https://github.com/numToStr/Comment.nvim
+-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+​
+local comment_string = require("ts_context_commentstring")
+​
+require("Comment").setup(
+    {
+        toggler = {
+            -- 切换行注释
+            line = "gcc",
+            --- 切换块注释
+            block = "gCC"
+        },
+        opleader = {
+            -- 可视模式下的行注释
+            line = "gc",
+            -- 可视模式下的块注释
+            block = "gC"
+        },
+        extra = {
+            -- 在当前行上方新增行注释
+            above = "gcO",
+            -- 在当前行下方新增行注释
+            below = "gco",
+            -- 在当前行行尾新增行注释
+            eol = "gcA"
+        },
+        -- 根据当前光标所在上下文判断不同类别的注释
+        -- 由 nvim-ts-context-commentstring  提供
+        pre_hook = function(ctx)
+            -- Only calculate commentstring for tsx filetypes
+            if vim.bo.filetype == "typescriptreact" then
+                local U = require("Comment.utils")
+                -- Detemine whether to use linewise or blockwise commentstring
+                local type = ctx.ctype == U.ctype.line and "__default" or "__multiline"
+                -- Determine the location where to calculate commentstring from
+                local location = nil
+                if ctx.ctype == U.ctype.block then
+                    location = comment_string.utils.get_cursor_location()
+                elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+                    location = comment_string.utils.get_visual_start_location()
+                end
+                return comment_string.calculate_commentstring(
+                    {
+                        key = type,
+                        location = location
+                    }
+                )
+            end
+        end
+    }
+)
 ```
