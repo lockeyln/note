@@ -245,3 +245,268 @@ require("lspsaga").setup(
 - go 进行工作区诊断
 
 
+##### 显示 LSP 进度
+在打开 Lua 文件时会等待大概十几秒 LSP 绑定的键位才会生效，这是由于 LSP 功能在启用前要先加载工作区。  
+我们可以安装 [fidget](https://github.com/j-hui/fidget.nvim) 插件来查看 LSP 加载工作区的进度。  
+在 lua/basic/plugins.lua 文件中安装 fidget：
+```
+-- LSP 进度提示
+use {
+    "j-hui/fidget.nvim",
+    config = function()
+        require("conf.fidget")
+    end
+}
+```
+在 lua/conf/ 目录下新建 fidget.lua 文件
+```
+-- https://github.com/j-hui/fidget.nvim
+​
+require("fidget").setup({
+    window = {
+        -- 窗口全透明，不建议修改这个选项
+        -- 否则主题透明时将会出现一大片黑块
+        blend = 0,
+    }
+})
+```
+重新进入 neovim 查看效果，现在右下角已经有了 LSP 加载的进度提示了。
+
+
+##### 插入模式传参提示
+在插入模式下编辑代码时，我们常常会想查看该函数的签名信息。通过 [lsp_signature](https://github.com/ray-x/lsp_signature.nvim) 插件就可以满足这种需求。
+```
+-- 插入模式获得函数签名
+use {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+        require("conf.lsp_signature")
+    end
+}
+```
+在 lua/conf/ 目录下新建 lsp_signature.lua 文件
+```
+-- https://github.com/ray-x/lsp_signature.nvim
+​
+require("lsp_signature").setup(
+    {
+        bind = true,
+        -- 边框样式
+        handler_opts = {
+            -- double、rounded、single、shadow、none
+            border = "rounded"
+        },
+        -- 自动触发
+        floating_window = false,
+        -- 绑定按键
+        toggle_key = "<C-j>",
+        -- 虚拟提示关闭
+        hint_enable = false,
+        -- 正在输入的参数将如何突出显示
+        hi_parameter = "LspSignatureActiveParameter"
+    }
+)
+```
+##### 灯泡提示代码行为
+[nvim-lightbulb](https://github.com/kosayoda/nvim-lightbulb) 能够在有代码行为可使用的情况下在行号栏中提示一个小灯泡，类似与 vsocde 的功能：
+
+```
+-- 灯泡提示代码行为
+use {
+    "kosayoda/nvim-lightbulb",
+    config = function()
+        require("conf.nvim-lightbulb")
+    end
+}
+```
+在 lua/conf/ 目录下新建 nvim-lightbulb.lua 文件
+```
+-- https://github.com/kosayoda/nvim-lightbulb
+​
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+```
+当有代码行为可用时可按下 <leader>ca 来调用代码行为
+
+##### 代码补全nvim-cmp
+```
+-- 自动代码补全系列插件
+use {
+    "hrsh7th/nvim-cmp",  -- 代码补全核心插件，下面都是增强补全的体验插件
+    requires = {
+        {"onsails/lspkind-nvim"}, -- 为补全添加类似 vscode 的图标
+        {"hrsh7th/vim-vsnip"}, -- vsnip 引擎，用于获得代码片段支持
+        {"hrsh7th/cmp-vsnip"}, -- 适用于 vsnip 的代码片段源
+        {"hrsh7th/cmp-nvim-lsp"}, -- 替换内置 omnifunc，获得更多补全
+        {"hrsh7th/cmp-path"}, -- 路径补全
+        {"hrsh7th/cmp-buffer"}, -- 缓冲区补全
+        {"hrsh7th/cmp-cmdline"}, -- 命令补全
+        {"f3fora/cmp-spell"}, -- 拼写建议
+        {"rafamadriz/friendly-snippets"}, -- 提供多种语言的代码片段
+        {"lukas-reineke/cmp-under-comparator"}, -- 让补全结果的排序更加智能
+        {"tzachar/cmp-tabnine", run = "./install.sh"} -- tabnine 源,提供基于 AI 的智能补全
+    },
+    config = function()
+        require("conf.nvim-cmp")
+    end
+}
+```
+
+nvim-cmp 是补全核心插件，而 vim-vsnip 是补全引擎，补全引擎有很多但我个人觉得 vim-vsnip 是最强大的。
+
+在 lua/conf/ 目录下新建 nvim-cmp.lua 文件
+```
+-- https://github.com/hrsh7th/nvim-cmp
+-- https://github.com/hrsh7th/vim-vsnip
+-- https://github.com/hrsh7th/cmp-vsnip
+-- https://github.com/hrsh7th/cmp-nvim-lsp
+-- https://github.com/hrsh7th/cmp-path
+-- https://github.com/hrsh7th/cmp-buffer
+-- https://github.com/hrsh7th/cmp-cmdline
+-- https://github.com/f3fora/cmp-spell
+-- https://github.com/rafamadriz/friendly-snippets
+-- https://github.com/lukas-reineke/cmp-under-comparator
+-- https://github.com/tzachar/cmp-tabnine
+​
+-- FIX: tabline 在某些计算机上有 1 个 BUG
+-- 当出现：
+--    TabNine is not executable
+-- 等字样时，需要手动执行（仅限 Manjaro）：
+--    rm ~/.local/share/nvim/plugged/cmp-tabnine/binaries
+--    ~/.local/share/nvim/plugged/cmp-tabnine/install.sh
+​
+local lspkind = require("lspkind")
+​
+local cmp = require("cmp")
+​
+cmp.setup(
+    ---@diagnostic disable-next-line: redundant-parameter
+    {
+        -- 指定补全引擎
+        snippet = {
+            expand = function(args)
+                -- 使用 vsnip 引擎
+                vim.fn["vsnip#anonymous"](args.body)
+            end
+        },
+        -- 指定补全源（安装了补全源插件就在这里指定）
+        sources = cmp.config.sources(
+            {
+                {name = "vsnip"},
+                {name = "nvim_lsp"},
+                {name = "path"},
+                {name = "buffer"},
+                {name = "cmdline"},
+                {name = "spell"},
+                {name = "cmp_tabnine"}
+            }
+        ),
+        -- 格式化补全菜单
+        formatting = {
+            format = lspkind.cmp_format(
+                {
+                    with_text = true,
+                    maxwidth = 50,
+                    before = function(entry, vim_item)
+                        vim_item.menu = "[" .. string.upper(entry.source.name) .. "]"
+                        return vim_item
+                    end
+                }
+            )
+        },
+        -- 对补全建议排序
+        sorting = {
+            comparators = {
+                cmp.config.compare.offset,
+                cmp.config.compare.exact,
+                cmp.config.compare.score,
+                cmp.config.compare.recently_used,
+                require("cmp-under-comparator").under,
+                require("cmp_tabnine.compare"),
+                cmp.config.compare.kind,
+                cmp.config.compare.sort_text,
+                cmp.config.compare.length,
+                cmp.config.compare.order
+            }
+        },
+        -- 绑定补全相关的按键
+        mapping = {
+            -- 上一个
+            ["<C-p>"] = cmp.mapping.select_prev_item(),
+            -- 下一个
+            ["<C-n>"] = cmp.mapping.select_next_item(),
+            -- 选择补全
+            ["<CR>"] = cmp.mapping.confirm(),
+            --  出现或关闭补全
+            ["<C-k>"] = cmp.mapping(
+                {
+                    i = function()
+                        if cmp.visible() then
+                            cmp.abort()
+                        else
+                            cmp.complete()
+                        end
+                    end,
+                    c = function()
+                        if cmp.visible() then
+                            cmp.close()
+                        else
+                            cmp.complete()
+                        end
+                    end
+                }
+            ),
+            -- 类似于 IDEA 的功能，如果没进入选择框，tab
+            -- 会选择下一个，如果进入了选择框，tab 会确认当前选择
+            ["<Tab>"] = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        local entry = cmp.get_selected_entry()
+                        if not entry then
+                            cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+                        end
+                        cmp.confirm()
+                    else
+                        fallback()
+                    end
+                end,
+                {"i", "s", "c"}
+            )
+        }
+    }
+)
+​
+-- 命令行 / 模式提示
+cmp.setup.cmdline(
+    "/",
+    {
+        sources = {
+            {name = "buffer"}
+        }
+    }
+)
+​
+-- 命令行 : 模式提示
+cmp.setup.cmdline(
+    ":",
+    {
+        sources = cmp.config.sources(
+            {
+                {name = "path"}
+            },
+            {
+                {name = "cmdline"}
+            }
+        )
+    }
+)
+```
+我重新进入 neovim 后，tabnine 报了一个错误
+![tabnine错误](../image/tabnine%E9%94%99%E8%AF%AF.jpg)
+退出 neovim 输入以下 2 条命令安装 tabnine（tabnine 一定在 ~/.local/share/nvim 目录下）：
+```
+-- 找到 com-tabnine 的安装目录
+cd ~/.local/share/nvim/site/pack/packer/start/cmp-tabnine/
+-- 安装 tabnine（确保安装了 curl 命令）
+./install.sh
+```
+
