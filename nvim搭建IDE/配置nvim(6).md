@@ -895,3 +895,196 @@ vim.keybinds.gmap("n", "<leader>cf", "<cmd>Neoformat<CR>", vim.keybinds.opts)
 
 
 ##### 主题扩展
+[lsp-colors](https://github.com/folke/lsp-colors.nvim) 是一个可选插件，当你的主题不支持 LSP 的某些诊断显示时，可通过该插件设定默认值。  
+```
+-- 为不支持 LSP 高亮的主题提供默认高亮方案
+use {
+    "folke/lsp-colors.nvim",
+    config = function()
+        require("conf.lsp-colors")
+    end
+}
+```
+在 lua/conf/ 目录下新建 lsp-colors.lua 文件
+```
+-- https://github.com/folke/lsp-colors.nvim
+​
+-- 当主题不支持 LSP 高亮时，将采用以下默认方案
+require("lsp-colors").setup(
+    {
+        Error = "#db4b4b",
+        Warning = "#e0af68",
+        Information = "#0db9d7",
+        Hint = "#10B981"
+    }
+)
+```
+##### 大纲预览vista
+[vista](https://github.com/liuchengxu/vista.vim) 是一款由 viml 编写的插件，能够快速预览当前文档的大纲视图。
+```
+-- view tree
+use {
+    "liuchengxu/vista.vim",
+    config = function()
+        require("conf.vista")
+    end
+}
+```
+在 lua/conf/ 目录下新建 vista.lua 文件
+```
+-- https://github.com/liuchengxu/vista.vim
+​
+vim.cmd(
+    [[
+" 缩进显示方式
+let g:vista_icon_indent = ["▸ ", ""]
+" 通过那种方式渲染大纲预览（ctags 或者 nvim_lsp）
+let g:vista_default_executive = 'nvim_lsp'
+" 启用图标支持"
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+]]
+)
+​
+-- 打开大纲预览
+vim.keybinds.gmap("n", "<leader>2", "<cmd>Vista!!<CR>", vim.keybinds.opts)
+```
+
+##### 常用语言 LSP 配置
+- sumneko_lua
+```
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+​
+return {
+    cmd = {"lua-language-server", "--locale=zh-CN"},
+    filetypes = {"lua"},
+    log_level = 2,
+    root_dir = function()
+        return vim.fn.getcwd()
+    end,
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = runtime_path
+            },
+            diagnostics = {
+                globals = {"vim"}
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true)
+            },
+            telemetry = {
+                enable = false
+            }
+        }
+    }
+}
+```
+- html
+```
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
+- css
+```
+-- 语言服务器名称是 cssls
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
+
+- golang
+```
+-- 语言服务器名称是 gopls
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
+- json
+```
+-- 语言服务器名称是 jsonls：
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
+
+- python
+```
+-- 语言服务器名称是 pyright
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end,
+    -- 禁用 Pyright 的诊断信息（使用 pylint）
+    handlers = {
+        ---@diagnostic disable-next-line: unused-vararg
+        ["textDocument/publishDiagnostics"] = function(...)
+        end
+    },
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off"
+            }
+        }
+    }
+}
+```
+- sql
+```
+-- 语言服务器名称是 sqls：
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
+
+- js\ts
+```
+-- 语言服务器名称是 tsserver：
+return {
+    cmd = {"typescript-language-server", "--stdio"},
+    init_options = {
+        hostInfo = "neovim"
+    },
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
+
+- vue
+```
+-- 语言服务器名称是 vuels：
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
+
+- markdown
+```
+-- 语言服务器名称是 zeta_note：
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end
+}
+```
