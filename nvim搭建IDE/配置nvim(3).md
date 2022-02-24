@@ -1,4 +1,12 @@
-# 切记以下配置用nvim编辑，否则出现<200b>之类的特殊字符，别的编辑器发现G不了
+## 切记以下配置用nvim编辑，否则出现<200b>之类的特殊字符，肉眼看不见，别的编辑器发现不了
+##### 特殊字符
+
+| Unicode code point | utf-8(in literal) | name             |
+|--------------------|-------------------|------------------|
+| U+200B或<200b>      | \xe2\x80\x8b     | ZERO WIDTH SPACE |
+| U+200C或<200c>      | \xe2\x80\x8c     | ZERO WIDTH NON-JOINER |
+| U+200D或<200d>      | \xe2\x80\x8d     | ZERO WIDTH JOINER |
+> 这些字符其实就是排版过程中产生的，而排版使用的规范是Unicode编码标准
 ##### packer 插件管理
 安装
 ```
