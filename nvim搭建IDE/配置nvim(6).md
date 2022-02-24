@@ -510,3 +510,16 @@ cd ~/.local/share/nvim/site/pack/packer/start/cmp-tabnine/
 ./install.sh
 ```
 
+##### 增强 LSP 补全
+[cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) 用于替换 neovim 默认的 omnifunc，能够增强补全体验。
+在 nvim-lsp-installer.lua 中加入以下代码：
+```
+-- 使用 cmp_nvim_lsp 代替内置 omnifunc，获得更强的补全体验
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+​
+-- 代替内置 omnifunc
+server_options.capabilities = capabilities
+```
+![替代位置](../image/%E6%9B%BF%E4%BB%A3%E4%BD%8D%E7%BD%AE1.jpg)
+![替代位置](../%E6%9B%BF%E4%BB%A3%E4%BD%8D%E7%BD%AE2.jpg)
