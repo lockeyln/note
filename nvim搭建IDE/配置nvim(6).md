@@ -523,3 +523,191 @@ server_options.capabilities = capabilities
 ```
 ![替代位置](../image/%E6%9B%BF%E4%BB%A3%E4%BD%8D%E7%BD%AE1.jpg)
 ![替代位置](../%E6%9B%BF%E4%BB%A3%E4%BD%8D%E7%BD%AE2.jpg)
+
+
+##### 新增代码片段
+vim-vsnip 能够新增 vscode 格式的用户代码片段，我们在 lua/basic/conf.lua 文件中设定一下代码片段保存的位置：
+```
+-- 指定代码片段存储路径
+vim.g.vsnip_snippet_dir = "~/.config/nvim/snippet"
+```
+退出重进 neovim，然后打开一个 Lua 文件，命令行输入命令:VsnipOpen  
+代码片段的格式和 vscode 相同：
+```
+// Place your snippets for html here. Each snippet is defined under a snippet name and has a prefix, body and
+// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+// same ids are connected.
+// Example:
+// "Print to console": {
+//  "prefix": "log",
+//  "body": [
+//      "console.log('$1');",
+//      "$2"
+//  ],
+//  "description": "Log output to console"
+// }
+
+```
+##### github copilot
+[copilot](https://github.com/github/copilot.vim) 它能快速生成一大片代码段。  
+比如想写个匹配手机号码的正则表达式，你只需要打上注释 match mobile number 即可获得代码实现，非常强大，但需要预览资格。
+```
+-- git copilot 自动补全
+use {
+    "github/copilot.vim",
+    config = function()
+        require("conf.copilot")
+    end
+}
+```
+在 lua/conf/ 目录下新建 copilot.lua 文件
+```
+-- https://github.com/github/copilot.vim
+​
+vim.g.copilot_no_tab_map = true
+​
+vim.keybinds.gmap("i", "<C-l>", "copilot#Accept('')", {silent = true, expr = true})
+​
+-- 使用 C-l 确认补全
+-- 使用 M-[ 查看上一个补全
+-- 使用 M-[ 查看下一个补全
+-- 使用 C-[ 关闭补全
+```
+输入 :Copilot setup 记录命令行中出现的设备号并填入网页的验证框中，而后 copilot 插件就能正常工作了。
+
+
+##### lint 代码诊断
+尽管许多 LSP 语言服务器已经自带了诊断信息，但我们更希望使用其他的诊断工具，如 eslint、pylint 等。  
+[nvim-lint](https://github.com/mfussenegger/nvim-lint) 插件就是做这个功能的，以 Python 举例，在此之前要先安装 Python 语言服务器 pyright。  
+在 Ubuntu 上安装 nodejs 和 npm，因为 Python 的语言服务器 Pyright 自动下载时需要使用到这 2 个工具：
+```
+wget https://nodejs.org/dist/v16.14.0/node-v16.14.0-linux-x64.tar.xz
+sudo tar -xvf ./node-v16.14.0-linux-x64.tar.xz -C /usr/local/
+sudo mv /usr/local/node-v16.14.0-linux-x64/ /usr/local/node
+nvim ~/.bashrc
+export PATH=/usr/local/node/bin:$PATH
+source ~/.bashrc
+```
+安装完成后在 lua/lsp/ 目录中新建 pyright.lua 文件
+```
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end,
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off"
+            }
+        }
+    }
+}
+```
+解开 lua/conf/nvim-lsp-installer.lua 文件中需要下载的语言服务器配置注释：
+```
+local servers = {
+    -- 语言服务器名称：配置选项
+    sumneko_lua = require("lsp.sumneko_lua"),
+    pyright = require(lsp.pyright),
+    -- tssever = require("lsp.pyright")
+}
+```
+在 lua/basic/plugins.lua 中安装 nvim-lint 插件：
+```
+-- 扩展 LSP 诊断
+use {
+    "mfussenegger/nvim-lint",
+    config = function()
+        require("conf.nvim-lint")
+    end
+}
+```
+在 lua/conf/ 目录下新建 nvim-lint.lua 文件
+```
+-- https://github.com/mfussenegger/nvim-lint
+​
+-- WARN: nvim-lint 手动下载诊断工具，确保该诊断工具能被全局调用
+-- pip3 install pylint
+​
+require("lint").linters_by_ft = {
+    python = {"pylint"}
+    -- javascript = {"eslint"},
+    -- typescript = {"eslint"},
+    -- go = {"golangcilint"}
+}
+​
+-- 配置 pylint，pylint 配置文件需要自己准备，这里不再演示
+require("lint.linters.pylint").args = {
+    "-f",
+    "json",
+    "--rcfile=~/.config/nvim/lint/pylint.conf"
+}
+​
+-- 何时触发检测：
+-- BufEnter    ： 载入 Buf 后
+-- BufWritePost： 写入文件后
+-- 由于搭配了 AutoSave，所以其他的事件就不用加了
+​
+vim.cmd([[
+au BufEnter * lua require('lint').try_lint()
+au BufWritePost * lua require('lint').try_lint()
+]])
+```
+输入 :PackerSync 等待该插件下载完成后退出 neovim，手动下载 pylint 诊断：
+```
+sudo apt install pylint
+```
+打开一个 py 文件，尝试输入内容，不出意外的话你应该能看到 2 个诊断源的信息，分别是 pyright 和 pylint  
+如果想禁用 pyright，而只启动 pylint 的诊断，可以更改 lua/lsp/pyright.lua 文件中的配置
+```
+return {
+    root_dir = function()
+        return vim.fn.getcwd()
+    end,
+    -- 禁用 Pyright 的诊断信息（只使用 pylint）
+    handlers = {
+        ---@diagnostic disable-next-line: unused-vararg
+        ["textDocument/publishDiagnostics"] = function(...)
+        end
+    },
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off"
+            }
+        }
+    }
+}
+```
+这样就只有 pylint 在诊断了  
+
+
+##### 语法高亮 nvim-treesitter
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) 插件有以下一些功能：
+
+- 语法高亮显示（主要功能，非常好用，打开了）
+- 增量选择代码块（很好用，打开了）
+- 缩进（关了，有 bug，在编辑 Python 文件时碰到了）
+- 折叠（关了，我喜欢用基于缩进的折叠  
+除此之外它也能配合一些其它插件来使用，如下面需要安装的彩虹括号。
+在安装它之前需要安装一些外部依赖：
+```
+sudo apt install build-essential -- 会安装一系列工具，包括 gcc
+​
+-- 还需要：tar 和 curl 或 git，如果有就不用装了
+```
+在 lua/basic/plugins.lua 文件中安装 nvim-treesitter 和 彩虹括号插件：
+```
+-- 语法高亮
+use {
+    "nvim-treesitter/nvim-treesitter",
+    run = {":TSupdate"},
+    requires = {
+        "p00f/nvim-ts-rainbow" -- 彩虹括号
+    },
+    config = function()
+        require("conf.nvim-treesitter")
+    end
+}
+```
