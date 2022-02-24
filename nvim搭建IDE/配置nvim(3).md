@@ -564,7 +564,7 @@ bufferline
 当开启多个文件时，我们希望 neovim 顶部能拥有不同的标签页，此时就需要使用 [bufferline](https://github.com/akinsho/bufferline.nvim)插件。  
 其它同类型插件：
 - [barbar](https://github.com/romgrk/barbar.nvim)
-- [luatab](https://github.com/alvarosevilla95/luatab.nvim)
+- [luatab](https://github.com/alvarosevilla95/luatab.nvim)  
 安装
 ```
 -- 支持 LSP 状态的 buffer 栏
