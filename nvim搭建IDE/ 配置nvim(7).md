@@ -73,11 +73,12 @@ dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
     dap.repl.close()
 end
-​
 -- 显示或隐藏调试界面
 vim.keybinds.gmap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<CR>", vim.keybinds.opts)
-在 lua/conf/ 目录下新建 nvim-dap.lua 文件，复制粘贴以下代码：
+```
 
+在 lua/conf/ 目录下新建 nvim-dap.lua 文件，复制粘贴以下代码：
+```
 -- https://github.com/mfussenegger/nvim-dap
 ​
 -- WARN: dap 手动下载调试器
