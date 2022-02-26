@@ -449,6 +449,7 @@ require("which-key").setup(
     }
 )
 ```
+![输入图片说明](../image/which-key%E6%95%88%E6%9E%9C.webp)
 
 ##### 模糊查找telescope
 它能够模糊搜索文件、文字、文档等非常多的资源。  
