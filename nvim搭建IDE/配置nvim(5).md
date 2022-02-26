@@ -545,6 +545,8 @@ vim.keybinds.gmap(
     vim.keybinds.opts
 )
 ```
+![notify效果](../image/notify%E6%95%88%E6%9E%9C.webp)
+
 ##### todo-comments
 在程序中经常书写 TODO、FIX 等注释标签进行标记是一个很好的习惯。  
 todo-comments 能够高亮你的注释标签，通过和 telescope 插件搭配能够快速的从当前项目中找到注释标签。
