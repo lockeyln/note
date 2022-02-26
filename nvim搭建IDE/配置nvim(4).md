@@ -33,7 +33,7 @@ vim.keybinds.gmap("n", "g*", "g*<Cmd>lua require('hlslens').start()<CR>", vim.ke
 vim.keybinds.gmap("n", "g#", "g#<Cmd>lua require('hlslens').start()<CR>", vim.keybinds.opts)
 
 ```
-##### 缩进indent-blankline
+##### 缩进线indent-blankline
 安装
 ```
 -- 显示缩进线
