@@ -258,14 +258,64 @@ return {
 2. 编辑器扩展
 > 编辑器为了能对特定的编程语言进行调试，需要增加编写扩展，例如，Emacs可以使用python-mode，调用pdb调试python代码。  
   内部都是调用了相应编程语言的debugger，调试功能也大同小异。一般而言，不同的编辑器需要单独编写自己的调试模块或者扩展，  
-  并且，同一个编辑器中，不同编程语言的调试模块也是不同的，如下图。
-![输入图片说明](../image/debug%E8%B0%83%E8%AF%95.webp)   
+  并且，同一个编辑器中，不同编程语言的调试模块也是不同的，如下图。  
+
+![输入图片说明](../image/debug%E8%B0%83%E8%AF%95.webp)     
 这样不论对编辑器开发者而言，还是对语言供应商而言，都是一个灾难。
 
 3. DAP
 > 介于此，微软提出了Debug Adapter Protocol，各编辑器通过相同的协议与debugger通信。  
   可是，让现有的debugger满足这个协议是非常困难的，因此，还需要增加一层，就是为各个debugger编写适配器（Debug Adapter），整 
   体架构如下图。  
+  
 ![输入图片说明](../image/DAP%E6%9E%B6%E6%9E%84.webp)  
+不同的编辑器通过统一的DAP（Debug Adapter Protocol）协议与各个debugger对应的适配器（Debug Adapter）通信，  
+这样大大降低了开发难度，创造了一个双赢局面。
+
+##### DAP工作原理
+```
+调试过程总共涉及了三个角色，
+编辑器（Editor，IDE），调试适配器（Debug Adapter），调试器（debuger）（包括被调试对象（debuggee））。
+
+（1）调试会话（debug session)
+调试过程是通过会话（session）来完成的，会话指的是编辑器与调试适配器（Debug Adapter）之间的交互过程。
+它们之间通过DAP（Debug Adapter Protocol）通信。
+
+总共有两种会话模式，single session mode 和 multi session mode。
+前者调试适配器（Debug Adapter）进程是由编辑器启动的，通过标准输入输出进行交互，调试结束后，该进程会被终止。
+后者，编辑器会假定调试适配器（Debug Adapter）已经启动了，然后通过唯一端口号与调试适配器（Debug Adapter）建立连接。
+编辑器终止会话，只是与调试适配器（Debug Adapter）断开连接。
+
+（2）初始化
+DAP（Debug Adapter Protocol）定义了很多调试特性，并且这个特性列表还在不断增加，
+为了避免使用版本号进行区分，为了兼容性考虑，
+编辑器和调试适配器（Debug Adapter）之间，在初始化时，要互相通信，
+借此让编辑器了解，调试适配器（Debug Adapter）支持哪些调试特性，这些特性合集称为能力（capabilities）。
+
+（3）调试方式
+调试配置器（Debug Adapter）有两种方式启动调试，launch 和 attach。
+
+attach方式，调试适配器（Debug Adapter）会通过调试器（debugger）与一个已经在运行的程序建立连接，
+用户可以启动和终止这个程序。
+
+launch方式，由调试适配器（Debug Adapter）启动被调试的程序，通过调试器（debugger）与之建立连接，
+被调试程序的启动和终止都是由调试适配器（Debug Adapter）负责的。
+
+（4）设置断点
+断点以及异常相关的配置，是在程序启动之前由编辑器传递给调试适配器（Debug Adapter）的，
+因为不同的调试器（debugger）对于何时使用断点信息有不同的原则，
+一些调试器（debugger）要提前知道断点信息，有些则不用。
+
+因此，编辑器会在启动调试之前，先把断点信息传递给调试适配器（Debug Adapter）。
+
+![输入图片说明](../image/DAP%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.webp)  
+
+（5）调用栈信息与局部变量
+调试适配器（Debug Adapter）会在断点处，向调试器（debugger）发送停止信号，
+程序停止后，编辑器会再通过调试适配器（Debug Adapter）请求获取调用栈信息（stacktrace）。
+
+在调试过程中，通常用户还需要查看局部变量的值，
+编辑器会再次发送请求，通过调试适配器（Debug Adapter）获取所有的局部变量名以及它们的值。
+```
 
 
