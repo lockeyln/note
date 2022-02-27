@@ -168,7 +168,7 @@ Python 的调试器配置写完后，需要安装 debugpy 模块：
 $ python3 -m pip install debugpy
 ```
 
-最终效果
+最终效果  
 ![输入图片说明](../image/pydebug%E6%95%88%E6%9E%9C.webp)
 
 ##### golang 调试器配置
