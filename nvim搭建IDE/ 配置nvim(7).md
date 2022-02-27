@@ -247,4 +247,25 @@ return {
 }
 ```
 
+#### 关于DAP（Debug Adapter Protocol）介绍
+1. 调试器（debugger）  
+> 编程语言是用debugger调试的，有些debugger可以用来调试多种编程语言，  
+  例如，GDB，它支持Assembly，C，C++，Go，Rust，等等。  
+  有些编程语言有自己的debugger，例如，Haskell的GHCi，有些debugger集成到了IDE中，例如，DrRacket中。 
+ 
+因为无法用平凡的办法证明程序没有错误，所以能对程序进行调试还是很必要的，
+
+2. 编辑器扩展
+> 编辑器为了能对特定的编程语言进行调试，需要增加编写扩展，例如，Emacs可以使用python-mode，调用pdb调试python代码。  
+  内部都是调用了相应编程语言的debugger，调试功能也大同小异。一般而言，不同的编辑器需要单独编写自己的调试模块或者扩展，  
+  并且，同一个编辑器中，不同编程语言的调试模块也是不同的，如下图。
+![输入图片说明](../image/debug%E8%B0%83%E8%AF%95.webp)   
+这样不论对编辑器开发者而言，还是对语言供应商而言，都是一个灾难。
+
+3. DAP
+> 介于此，微软提出了Debug Adapter Protocol，各编辑器通过相同的协议与debugger通信。  
+  可是，让现有的debugger满足这个协议是非常困难的，因此，还需要增加一层，就是为各个debugger编写适配器（Debug Adapter），整 
+  体架构如下图。  
+![输入图片说明](../image/DAP%E6%9E%B6%E6%9E%84.webp)  
+
 
