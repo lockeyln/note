@@ -578,7 +578,7 @@ use {
     end
 }
 ```
-新建文件 buffline.lua 到 lua/conf/ 目录下
+新建文件 bufferline.lua 到 lua/conf/ 目录下
 ```
 -- https://github.com/akinsho/bufferline.nvim
 ​
