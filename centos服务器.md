@@ -51,3 +51,10 @@ dnf install php
 dnf install php php-curl php-dom php-exif php-fileinfo php-fpm php-gd php-hash php-json php-mbstring php-mysqli php-openssl php-pcre php-xml libsodium
 
 ```
+
+#### 向服务器传输文件  
+PuTTY安装目录下的pscp.exe文件拷贝到/Windows/System32/目录下，在cmd控制台执行命令
+```
+pscp -r 要传输的文件路径 ubuntu账户名@ubuntu服务器地址：文件在ubuntu服务器的存放位置
+```
+> pscp F:\BaiduNetdiskDownload\xxx root@服务器地址:/home/download
