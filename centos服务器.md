@@ -57,4 +57,4 @@ PuTTY安装目录下的pscp.exe文件拷贝到/Windows/System32/目录下，在c
 ```
 pscp -r 要传输的文件路径 ubuntu账户名@ubuntu服务器地址：文件在ubuntu服务器的存放位置
 ```
-> pscp F:\BaiduNetdiskDownload\xxx root@服务器地址:/home/download
+> pscp -r F:\BaiduNetdiskDownload\xxx root@服务器地址:/home/download
