@@ -1,3 +1,5 @@
+[VIM中文用户手册](https://yianwillis.github.io/vimcdoc/doc/help.html)
+
 ### 字符级
 | 按键 | 功能 |
 |---|-------------|
