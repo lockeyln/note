@@ -12,7 +12,8 @@
 > :hover 鼠标悬停状态  
 > :active 激活状态，鼠标按下状态  
 > 顺序遵循爱恨法则:love hate
-7. 伪元素选择器(::before/after)
+7. 伪元素选择器(::before/after)  
+> 选择一个元素的某个部分而不是元素自己
 > 如span::before{content:"《"}
 
 ### 选择器组合
