@@ -24,3 +24,10 @@
 3. 子元素 >
 4. 相邻兄弟元素 +
 5. 兄弟元素 ~
+
+### css书写顺序
+1. 位置属性（position,top,right,z-index,display,float等）
+2. 大小（width,height,padding,margin）
+3. 文字系列（font,line-height,letter-spacing,color-text-align等）
+4. 背景（background,border等）
+5. 其他（animation,transition等）
