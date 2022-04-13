@@ -32,4 +32,4 @@
 4. 背景（background,border等）
 5. 其他（animation,transition等）
 
-[书写规范](https://guide.aotu.io)
+[前端书写规范](https://guide.aotu.io)
