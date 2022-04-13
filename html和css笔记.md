@@ -31,3 +31,5 @@
 3. 文字系列（font,line-height,letter-spacing,color-text-align等）
 4. 背景（background,border等）
 5. 其他（animation,transition等）
+
+[书写规范](https://guide.aotu.io)
