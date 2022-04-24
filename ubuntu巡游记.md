@@ -10,7 +10,23 @@
 | usr | 逻辑分区  | Ext4日志文件系统 | /usr |50G |
 
 ### 软件篇
-1. neofetch 在终端中显示 Linux 系统信息
-2. git
-3. nodejs npm yam
-4. pip
+#### neofetch  
+> 在终端中显示 Linux 系统信息
+
+#### git  
+
+#### nodejs npm yam
+##### nodejs
+1.将二进制存档解压缩到您要安装 Node 的任何目录，我使用/usr/local/lib/nodejs
+```
+下载tar.xz格式nodejs
+sudo mkdir -p /usr/local/lib/nodejs
+sudo tar -xJvf node-$VERSION-$DISTRO.tar.xz -C /usr/local/lib/nodejs
+```
+２. 设置环境变量~/.profile  
+```
+export PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:$PATH
+```
+3. 刷新.profile
+##### npm
+#### pip
