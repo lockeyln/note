@@ -23,10 +23,14 @@
 sudo mkdir -p /usr/local/lib/nodejs
 sudo tar -xJvf node-$VERSION-$DISTRO.tar.xz -C /usr/local/lib/nodejs
 ```
-２. 设置环境变量~/.profile  
+２. 设置环境变量 
 ```
+打开~/.bashrc添加行
 export PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:$PATH
 ```
-3. 刷新.profile
+3. 使生效
+```
+source .bashrc
+```
 ##### npm
 #### pip
