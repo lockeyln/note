@@ -1,5 +1,5 @@
 由于升级ubuntu 22.04 lts失败无法进系统，只能重装系统作此记录
-### 分区方案(只有swap和/是必须分区的)
+## 分区方案(只有swap和/是必须分区的)
 | 分区名 | 分区类型 | 用于 | 挂载点 | 大小 |
 | -- | ---- | -- | ---- | ---- |
 | efi(efi分区) | 主分区 | Ext4日志文件系统 | /efi | 1G |
@@ -9,14 +9,17 @@
 | home | 主分区 | Ext4日志文件系统 | /home |100G |
 | usr | 逻辑分区  | Ext4日志文件系统 | /usr |50G |
 
-### 软件篇
+## 软件篇
 #### neofetch  
 > 在终端中显示 Linux 系统信息
 
-#### git  
+#### *git*
+```
+sudo apt install git
+```
 
 #### nodejs npm yam
-##### nodejs
+##### *nodejs*
 1.将二进制存档解压缩到您要安装 Node 的任何目录，我使用/usr/local/lib/nodejs
 ```
 下载tar.xz格式nodejs
