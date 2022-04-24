@@ -9,3 +9,7 @@
 | home | 主分区 | Ext4日志文件系统 | /home |100G |
 | usr | 逻辑分区  | Ext4日志文件系统 | /usr |50G |
 
+### 软件篇
+1. neofetch 在终端中显示 Linux 系统信息
+2. git
+3. 
