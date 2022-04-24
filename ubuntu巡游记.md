@@ -12,4 +12,5 @@
 ### 软件篇
 1. neofetch 在终端中显示 Linux 系统信息
 2. git
-3. 
+3. nodejs npm yam
+4. pip
