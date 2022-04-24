@@ -10,16 +10,17 @@
 | usr | 逻辑分区  | Ext4日志文件系统 | /usr |50G |
 
 ## 软件篇
+| 软件名 | 功能 | 
+| -- | ---- | 
+| git | 版本控制 |
+| curl | 下载　|
+
+
 #### neofetch  
 > 在终端中显示 Linux 系统信息
 
-#### *git*
-```
-sudo apt install git
-```
 
-#### nodejs npm yam
-##### *nodejs*
+#### nodejs npm yarn
 1.将二进制存档解压缩到您要安装 Node 的任何目录，我使用/usr/local/lib/nodejs
 ```
 下载tar.xz格式nodejs
@@ -35,5 +36,5 @@ export PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:$PATH
 ```
 source .bashrc
 ```
-##### npm
+
 #### pip
