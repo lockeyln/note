@@ -36,5 +36,14 @@ export PATH=/usr/local/lib/nodejs/node-$VERSION-$DISTRO/bin:$PATH
 ```
 source .bashrc
 ```
-
+##### 安装yarn  
+启用 Yarn 官方软件源，导入 GPG key，并且安装软件包
+```
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+```
+```
+sudo apt update
+sudo apt install yarn
+```
 #### pip
