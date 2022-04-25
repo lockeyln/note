@@ -66,3 +66,4 @@ sudo groupadd fuse
 sudo mount -o loop Some.AppImage /mnt
 /mnt/AppRun
 ```
+---
