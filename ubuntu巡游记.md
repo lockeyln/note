@@ -49,10 +49,20 @@ sudo apt install python3-pip
 ```
 ---
 #### nvim
-> appimage格式需要FUSE(Filesystem in Userspace用户态文件系统)　　
+> appimage格式需要FUSE(Filesystem in Userspace用户态文件系统)　　　
+##### 安装fuse　
 ```
-用户可通过fuse在用户空间来定制实现自己的文件系统。
 sudo apt install fuse libfuse2
 sudo modprobe fuse
 sudo groupadd fuse
+```
+##### 如果不想安装 FUSE，可以挂载或提取AppImage的方法运行
+1. 提取
+```
+要提取 AppImage 的内容，只需使用--appimage-extract
+````
+2. 挂载
+```
+sudo mount -o loop Some.AppImage /mnt
+/mnt/AppRun
 ```
