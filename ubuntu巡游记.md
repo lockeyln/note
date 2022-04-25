@@ -47,3 +47,12 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 ```
 sudo apt install python3-pip
 ```
+---
+#### nvim
+> appimage格式需要FUSE(Filesystem in Userspace用户态文件系统)　　
+```
+用户可通过fuse在用户空间来定制实现自己的文件系统。
+sudo apt install fuse libfuse2
+sudo modprobe fuse
+sudo groupadd fuse
+```
