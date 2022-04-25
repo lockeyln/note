@@ -453,7 +453,7 @@ require("which-key").setup(
 
 ##### 模糊查找telescope
 它能够模糊搜索文件、文字、文档等非常多的资源。  
-该插件有 2 个外部依赖，[fd](https://github.com/sharkdp/fd) 和 [repgrep](https://github.com/BurntSushi/ripgrep)   
+该插件有 2 个外部依赖，[fd](https://github.com/sharkdp/fd) 和 [ripgrep](https://github.com/BurntSushi/ripgrep)   
 > sudo apt install fd-find
 ```
 -- 模糊查找
