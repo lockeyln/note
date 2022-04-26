@@ -14,7 +14,8 @@
 | -- | ---- | 
 | git | 版本控制 |
 | curl | 通过url传输数据　|
-
+| Qv2ray | 科学上网 |
+| kitty | 终端仿真器 |
 
 #### neofetch  
 > 在终端中显示 Linux 系统信息
@@ -67,4 +68,4 @@ sudo mount -o loop Some.AppImage /mnt
 /mnt/AppRun
 ```
 ---
- #### 科学上网Qv2ray
+
