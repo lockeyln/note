@@ -67,3 +67,4 @@ sudo mount -o loop Some.AppImage /mnt
 /mnt/AppRun
 ```
 ---
+ #### 科学上网Qv2ray
