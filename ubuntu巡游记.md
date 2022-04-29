@@ -74,3 +74,6 @@ sudo mount -o loop Some.AppImage /mnt
 | -- | ---- | 
 | ctrl+shift+f2 | 打开配置文件 |
 | Ctrl+Shift+(-/+) | 调整大小 |
+
+#### 终端提示xx个软件包为被升级解决办法
+> sudo apt dist-upgrade
