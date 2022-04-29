@@ -68,4 +68,9 @@ sudo mount -o loop Some.AppImage /mnt
 /mnt/AppRun
 ```
 ---
-
+#### kitty终端
+(kitty配置主页)[https://sw.kovidgoyal.net/kitty/conf/#]
+| 按键 | 功能 | 
+| -- | ---- | 
+| ctrl+shift+f2 | 打开配置文件 |
+| Ctrl+Shift+(-/+) | 调整大小 |
