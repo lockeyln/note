@@ -69,7 +69,7 @@ sudo mount -o loop Some.AppImage /mnt
 ```
 ---
 #### kitty终端
-(kitty配置主页)[https://sw.kovidgoyal.net/kitty/conf/#]
+[kitty配置主页](https://sw.kovidgoyal.net/kitty/conf/#)
 | 按键 | 功能 | 
 | -- | ---- | 
 | ctrl+shift+f2 | 打开配置文件 |
