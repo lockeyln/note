@@ -13,8 +13,8 @@ end
 ##### pcall函数
 
 ```
-lua中pcall函数是一种异常处理函数，提供了一种安全的环境来运行函数，同时会捕获函数运行时的异常。
-pcall接收一个函数和要传递个后者的参数，并执行，执行结果：有错误、无错误；返回值true或者或false, errorinfo
+pcall在保护模式（protected mode）下执⾏函数内容，同时捕获所有的异常和错误。若⼀切正常，pcall返回true以及“被执⾏函数”的返回
+值；否则返回nil和错误信息。
 ```
 ##### return和break
 > return和break后面的语句永远无法被执行  
