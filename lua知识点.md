@@ -17,7 +17,8 @@ lua中pcall函数是一种异常处理函数，提供了一种安全的环境来
 pcall接收一个函数和要传递个后者的参数，并执行，执行结果：有错误、无错误；返回值true或者或false, errorinfo
 ```
 ##### return和break
-> return和break后面的语句永远无法被执行
+> return和break后面的语句永远无法被执行  
+
 
 - \# 井号取字符串或table长度
 - function常用写法
