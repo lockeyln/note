@@ -22,7 +22,7 @@ pcall接收一个函数和要传递个后者的参数，并执行，执行结果
 - \# 井号取字符串或table长度
 - function常用写法
 ```
-Lua 中我们可以将函数作为参数传递给函数
+Lua 中可以将函数作为参数传递给函数(常见用法)
 myprint = function(param)
    print("这是打印函数 -   ##",param,"##")
 end
