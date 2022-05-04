@@ -91,7 +91,10 @@ Client 专注于页面样式实现， Server 负责提供语言支持，包括�
 #### :set runtimepath?  显示script搜索路径
 
 ### 彩蛋
-#### :smile
+> :smile
 
 ### 删除配置和插件
-.config .local .cache
+> .config .local .cache
+
+### 查看某个快捷键的详情
+> :map 快捷键 (例如 :map <leader>f)
