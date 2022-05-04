@@ -1,5 +1,7 @@
 [VIM中文用户手册](https://yianwillis.github.io/vimcdoc/doc/help.html)
 
+### Ctrl+C 等同于 ESC
+
 ### 字符级
 | 按键 | 功能 |
 |---|-------------|
@@ -323,3 +325,5 @@ marker：对文中的标准进行折叠
 | :-tabc | 关闭上一个标签页 |
 | :+tabc | 关闭下一个标签页 |
 | :tabonly 或 :tabo | 关闭其他标签页 |
+#### 彩蛋
+:smile
