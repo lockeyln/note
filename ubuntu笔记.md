@@ -181,6 +181,15 @@ sudo fc-cache -fv # 刷新系统字体缓存 <br>
 > sudo apt dist-upgrade
 
 #### 安装alacritty
-1. 安装rust curl https://sh.rustup.rs -sSf | sh   
-2. 安装依赖 sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
-3. 下载源代码 git clone https://github.com/alacritty/alacritty.git
+1. 安装rust 
+```
+curl https://sh.rustup.rs -sSf | sh   
+```
+2. 安装依赖 
+```
+sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+```
+3. 下载源代码 
+```
+git clone https://github.com/alacritty/alacritty.git
+```
