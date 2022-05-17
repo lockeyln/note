@@ -268,7 +268,7 @@ Fcitx 5 提供了一个基于 Qt 的强大易用的 GUI 配置工具，可以对
 Fcitx 5 默认的外观比较朴素，用户可以根据喜好使用自定义主题。  
 第一种方式为使用 [经典用户界面](https://fcitx-im.org/wiki/Theme_Customization/zh-cn#%E7%BB%8F%E5%85%B8%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2),可以在 [gitHub 搜索主题](https://github.com/search?q=fcitx5+theme&type=Repositories) 然后在 Fcitx5 configtool —— 「附加组件」 —— 「经典用户界面」中设置即可。  
 
-第二种方式为使用 Kim面板，一种基于 DBus 接口的用户界面。此处安装了 [Input Method Panel](https://extensions.gnome.org/extension/261/kimpanel/) 这个 GNOME 扩展，黑色的风格与正在使用的 GNOME 主题 Orchis-dark 非常搭配。  
+第二种方式为使用 [Kim面板](https://fcitx-im.org/wiki/Theme_Customization/zh-cn#kim%E9%9D%A2%E6%9D%BF)，一种基于 DBus 接口的用户界面。此处安装了 [Input Method Panel](https://extensions.gnome.org/extension/261/kimpanel/) 这个 GNOME 扩展，黑色的风格与正在使用的 GNOME 主题 Orchis-dark 非常搭配。  
 ![效果图](https://pic2.zhimg.com/v2-e1b24f4d83cd0be5da2a6a9d69f042f5_r.jpg)  
 
 - 卸载 iBus 影响 Fcitx 5 正常使用
