@@ -215,3 +215,59 @@ echo 'fpath+=${ZDOTDIR:-~}/.zsh_functions' >> ${ZDOTDIR:-~}/.zshrc
 
 cp extra/completions/_alacritty ${ZDOTDIR:-~}/.zsh_functions/_alacritty
 ```
+---
+
+#### 安装fcitx5
+- 最小安装  
+为使用 Fcitx 5，需要安装三部分基本内容：  
+1. Fcitx 5 主程序
+2. 中文输入法引擎
+3. 图形界面相关
+```
+sudo apt install fcitx5 \
+fcitx5-chinese-addons \
+fcitx5-frontend-gtk3 fcitx5-frontend-gtk2 \
+fcitx5-frontend-qt5 kde-config-fcitx5
+```
+- 安装中文词库
+在 GitHub 打开 [维基百科中文拼音词库](https://github.com/felixonmars/fcitx5-pinyin-zhwiki) 的 [Releases](https://github.com/felixonmars/fcitx5-pinyin-zhwiki/releases) 界面，下载最新版的 .dict 文件。按照 README 的指导，将其复制到 ~/.local/share/fcitx5/pinyin/dictionaries/ 文件夹下即可。
+```
+# 下载词库文件
+wget https://github.com/felixonmars/fcitx5-pinyin-zhwiki/releases/download/0.2.4/zhwiki-20220416.dict
+# 创建存储目录
+mkdir ~/.local/share/fcitx5/pinyin/dictionaries/
+# 移动词库文件至该目录
+mv zhwiki-20220416.dict ~/.local/share/fcitx5/pinyin/dictionaries/
+```
+- 配置  
+设置为默认输入法  
+> 使用 im-config 工具可以配置首选输入法，在任意命令行输入：  im-config
+
+- 环境变量
+需要为桌面会话设置环境变量，即将以下配置项写入某一配置文件中：  
+```
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+```
+如果使用 Bash 作为 shell，则建议写入至 ~/.bash_profile ，这样只对当前用户生效，而不影响其他用户。另一个可以写入此配置的文件为系统级的 /etc/profile 。  
+
+- 开机自启动
+
+安装 Fcitx 5 后并没有自动添加到开机自启动中，每次开机后需要手动在应用程序中找到并启动，非常繁琐。  
+解决方案非常简单，在 Tweaks（sudo apt install gnome-tweaks）中将 Fcitx 5 添加到「开机启动程序」列表中即可。
+
+- Fcitx 配置
+Fcitx 5 提供了一个基于 Qt 的强大易用的 GUI 配置工具，可以对输入法功能进行配置。有多种启动该配置工具的方法：  
+1. 在应用程序列表中打开「Fcitx 配置」
+2. 在 Fcitx 托盘上右键打开「设置」
+3. 命令行命令 fcitx5-configtool  
+根据个人偏好进行设置即可。需要注意的是「输入法」标签页下，应将「键盘 - 英语」放在首位，拼音（或其他中文输入法）放在后面的位置。  
+
+- 自定义主题
+Fcitx 5 默认的外观比较朴素，用户可以根据喜好使用自定义主题。  
+第一种方式为使用 [经典用户界面](https://fcitx-im.org/wiki/Theme_Customization/zh-cn#%E7%BB%8F%E5%85%B8%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2),可以在 [gitHub 搜索主题](https://github.com/search?q=fcitx5+theme&type=Repositories) 然后在 Fcitx5 configtool —— 「附加组件」 —— 「经典用户界面」中设置即可。  
+
+第二种方式为使用 Kim面板，一种基于 DBus 接口的用户界面。此处安装了 Input Method Panel 这个 GNOME 扩展，黑色的风格与正在使用的 GNOME 主题 Orchis-dark 非常搭配。  
+![效果图](https://pic2.zhimg.com/v2-e1b24f4d83cd0be5da2a6a9d69f042f5_r.jpg)  
+
