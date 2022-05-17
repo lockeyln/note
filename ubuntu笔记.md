@@ -271,3 +271,8 @@ Fcitx 5 默认的外观比较朴素，用户可以根据喜好使用自定义主
 第二种方式为使用 Kim面板，一种基于 DBus 接口的用户界面。此处安装了 Input Method Panel 这个 GNOME 扩展，黑色的风格与正在使用的 GNOME 主题 Orchis-dark 非常搭配。  
 ![效果图](https://pic2.zhimg.com/v2-e1b24f4d83cd0be5da2a6a9d69f042f5_r.jpg)  
 
+- 卸载 iBus 影响 Fcitx 5 正常使用
+> sudo apt remove ibus  
+卸载了 iBus，但重启（使生效）之后发现 Fcitx 5 受到了影响。具体表现为：除在终端中之外，其他输入场景无法切换至中文输入。使用 apt 装回 iBus，再次重启即又恢复正常。  
+
+检查包依赖关系，卸载 ibus 包后会自动移除 ibus-data、ibus-gtk4、python3-ibus-1.0 三个包，似乎都只是与 iBus 紧密联系的。暂为不解之谜。
