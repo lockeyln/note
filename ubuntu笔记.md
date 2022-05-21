@@ -164,9 +164,9 @@ sudo mount -o loop Some.AppImage /mnt
 #### 字体安装
 > 字体安装目录 /usr/share/fonts  <br>
 cd /usr/share/fonts/ #字体存放目录 <br>
-sudo mkfontscale # 生成核心字体信息 <br>
-sudo mkfontdir # 生成字体文件夹 <br>
-sudo fc-cache -fv # 刷新系统字体缓存 <br>
+sudo mkfontscale # 生成核心字体信息，用来控制字体旋转缩放 <br>
+sudo mkfontdir # 生成字体文件夹，用来控制字体粗斜体产生 <br>
+sudo fc-cache -fv # 刷新系统字体缓存，让系统认识认识该字体 <br>
 
 
 #### appimage
