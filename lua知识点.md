@@ -54,3 +54,24 @@ local result = name == "hello" and "I know you" or "I don't know you"
 print(result)
 -- I know you
 ```
+#### 作用域
+在 Lua 中，所有变量都具有全局作用域和局部作用域之分。
+
+未经 local 声明的函数或变量都将存储在全局对象 _G 中。
+
+全局对象 _G 类似于 Javascript 中的 window 对象，这意味这你可以在任意地方调用到该全局变量。
+
+而被 local 声明的变量只能在当前模块中调用。
+
+所以在声明函数或变量时，我们应该为其加上 local 前缀，否则可能会造成命名冲突的情况发生：
+```
+A = "GLOBAL"
+
+-- 下面两种访问方式是一样的，类似于 js 中的 window.A 与 A
+print(A) -- GLOBAL
+print(_G.A) -- GLOBAL
+
+local a = "local" -- local
+
+print(a)
+```
