@@ -54,7 +54,7 @@ packer 是一款由 Lua 语言编写的 neovim 插件管理器。
 你可以 [主页](https://github.com/wbthomason/packer.nvim) 访问 packer 的 github 获得更多信息。  
 
 **使用**  
-> git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+> git clone --depth 1 https://github.com/wbthomason/packer.nvim\  
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim  
  
 ```
