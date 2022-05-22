@@ -110,3 +110,54 @@ packer 支持延迟加载插件，所谓延迟加载就是在特定的情况下�
        module = {"test-plugin"},
     }
 ```
+##### 自动加载配置文件
+packer 对每一个插件的加载都提供了 2 个 hooks，分别是 setup 和 config。
+
+它们可以是函数：
+
+```
+use {
+    "askfiy/test-plugin",
+    setup = function()
+        print("before ..")
+        require("configure/plugins/nv_test-plugin").before()
+    end,
+    config = function()
+        print("load ..")
+        require("configure/plugins/nv_test-plugin").load()
+    end
+}
+```
+
+也可以是字符串：  
+
+```
+use {
+    "askfiy/test-plugin",
+    setup = "require('configure/plugins/nv_test-plugin').before()",
+    config = "require('configure/plugins/nv_test-plugin').load()"
+}
+```
+
+当插件很多时，你可能会看到下面这样的情形：
+```
+use {
+    "askfiy/test-plugin1",
+    setup = "require('configure/plugins/nv_test-plugin1').before()",
+    config = "require('configure/plugins/nv_test-plugin1').load()"
+}
+​
+​
+use {
+    "askfiy/test-plugin2",
+    setup = "require('configure/plugins/nv_test-plugin2').before()",
+    config = "require('configure/plugins/nv_test-plugin2').load()"
+}
+​
+​
+use {
+    "askfiy/test-plugin3",
+    setup = "require('configure/plugins/nv_test-plugin3').before()",
+    config = "require('configure/plugins/nv_test-plugin3').load()"
+}
+```
