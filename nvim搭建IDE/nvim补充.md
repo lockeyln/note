@@ -146,18 +146,43 @@ use {
     setup = "require('configure/plugins/nv_test-plugin1').before()",
     config = "require('configure/plugins/nv_test-plugin1').load()"
 }
-​
-​
+
 use {
     "askfiy/test-plugin2",
     setup = "require('configure/plugins/nv_test-plugin2').before()",
     config = "require('configure/plugins/nv_test-plugin2').load()"
 }
-​
-​
+
 use {
     "askfiy/test-plugin3",
     setup = "require('configure/plugins/nv_test-plugin3').before()",
     config = "require('configure/plugins/nv_test-plugin3').load()"
 }
+```
+
+##### Packer 的封装
+每一个插件都需要使用 use，这很麻烦。我们可以对 packer 做一些封装。
+
+伪代码如下所示：  
+
+```
+插件列表 = {
+    ["插件地址"] = {
+        延迟加载项目 ...
+    },
+    ["插件地址"] = {
+        延迟加载项目 ...
+    },
+    ["插件地址"] = {
+        延迟加载项目 ...
+    },
+}
+
+循环插件列表的 key 和 value
+    插件配置 = {插件key, value} 的合并
+    判断是否在 lua/configure/plugins 中存在插件配置文件
+    如果存在
+        插件配置.setup = "插件配置文件中的 before 函数"
+        插件配置.config = "插件配置文件中的 load 函数 和 after 函数"
+    use(插件配置)
 ```
