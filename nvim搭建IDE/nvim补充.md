@@ -45,3 +45,68 @@ $ tree ~/.config/nvim
 └── init.lua                      -- 文件，neovim 配置入口文件
 ```
 
+#### 插件管理器packer
+**简介**
+packer 是一款由 Lua 语言编写的 neovim 插件管理器。
+
+它最大的优点是支持结构化配置，能够以非常简单的办法实现延迟加载。
+
+你可以 [主页](https://github.com/wbthomason/packer.nvim) 访问 packer 的 github 获得更多信息。  
+
+**使用**  
+> git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim  
+ 
+```
+return require("packer").startup(function()
+    -- 第一个插件
+    use "wbthomason/packer.nvim"
+​
+    -- 第二个插件
+    use {
+            "askfiy/nvim-picgo",   -- 插件地址
+            as = "picgo",          -- 给插件取别名
+            opt = true,            -- 是否可选
+            cmd = {"UploadImage"}, -- 执行以下命令时才会加载插件
+            setup = function()     -- 插件加载前执行的代码
+                print("before ..")
+            end,
+            config = function()    -- 插件加载完成后执行的代码
+                print("load ..")
+            end
+    }
+​
+    -- 第三个插件
+    use {
+         "nvim-treesitter/nvim-treesitter",
+         run = ":TSUpdate", -- 插件下载或更新后自动运行的代码
+         commit = "96cdf2937491fbc", -- 使用体定提交记录的插件
+    }
+end)
+```
+##### 延迟加载  
+packer 支持延迟加载插件，所谓延迟加载就是在特定的情况下才加载该插件。
+
+这意味着使用 packer 管理 neovim 插件时，neovim 并不会因为插件数量的增多而变得臃肿不堪。
+
+下面是一些延迟加载的例子，多个延迟加载的条件可以组合在一起，只有所有条件满足时才加载该插件：  
+
+```
+ use {
+       "askfiy/test-plugin",
+       -- 当 plugin1 和 plugin2 加载完成后才加载该插件
+       after = {"plugin1", "plugin2"},
+       -- 运行 :Test1 或 :Test2 时才加载该插件
+       cmd = {"Test1", "Test2"},
+       -- 打开 python 文件或 lua 文件时加载该插件
+       ft = {"python", "lua"},
+       -- 按下以下任意一个按键时才加载该插件
+       keys = {"<leader>pt", "<leader>pr"},
+       -- 当以下任意一个事件被触发时才加载该插件
+       event = {"BufEnter" },
+       -- 当执行以下任意一个函数时才加载该插件
+       fn = {"test#fn1", "test#fn2"},
+       -- 当使用 require 加载以下任意模块时才加载该插件
+       module = {"test-plugin"},
+    }
+```
