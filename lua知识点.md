@@ -40,4 +40,7 @@ end
 使用了冒号之后，就相当于使用点号时第一个参数为self一样，只是不再需要显式地定义self参数以及主动地传递参数。
 ```
 #### vim.fn
-> 作用与vim.call()一样，调用函数
+> 作用与vim.call()一样，调用函数  
+
+### 布尔值
+> bool只有两个可选值：false和true。lua把false和nil看作是false，其他的都是true，数字0也是true
