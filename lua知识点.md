@@ -75,3 +75,53 @@ local a = "local" -- local
 
 print(a)
 ```
+#### 闭包
+由于 Lua 中的函数可以被赋值，这意味着函数也可以被当作参数传递。
+
+闭包函数在 neovim 中书写一些配置项时可能会被用到，它的定义如下  
+```
+local function set(conf)
+    return function()
+        print(conf.a) -- 1
+        print(conf.b) -- 2
+    end
+end
+
+local inner = set({ a = 1, b = 2 })
+
+-- 其实 inner 更多的是作为一个 callbackfn 被调用
+inner()
+```
+
+#### 元表
+当定义一个 table 时，我们可以为该 table 定义 __call 方法以此规定该 table 被调用时的处理逻辑（和 Python 的元类 __call__ 很像）。
+
+也可以为该 table 定义 __index 方法来继承另一个 table。  
+
+```
+local metatable = {
+    f1 = function()
+        print("metatable f1 ...")
+    end,
+    f2 = function()
+        print("metatable f2")
+    end,
+}
+
+-- 第一个 {} 是一个对象本身，第二个 {} 代表它的行为
+-- 通过 __index 第一个 {} 继承了 第二个 {}
+local obj = setmetatable({}, {
+    __call = function()
+        print("__call ...")
+    end,
+    __index = metatable,
+})
+
+obj()
+obj.f1()
+obj.f2()
+
+-- __call ...
+-- metatable f1 ...
+-- metatable f2
+```
