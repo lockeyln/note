@@ -186,3 +186,174 @@ use {
         插件配置.config = "插件配置文件中的 load 函数 和 after 函数"
     use(插件配置)
 ```
+##### 插件的加载顺序
+注意，在nvim中，有某些插件是由 viml 编写的。 而大部分所选定的插件都是由 Lua 编写的。
+
+viml 插件编写的配置不需要在 hooks config 中处理，这样会造成一些 lazy load 的问题。
+
+而是应该放在 hooks setup 中处理。
+
+我们可以在插件配置中手动定义一个 key 来判断插件的类型。
+
+```
+插件列表 = {
+    ["插件地址"] = {
+        ptp = viml,   -- plugin type 的缩写
+        延迟加载项目 ...
+    },
+    ["插件地址"] = {
+        延迟加载项目 ...
+    },
+    ["插件地址"] = {
+        延迟加载项目 ...
+    },
+}
+```
+伪代码也需要做出一些更改：  
+
+```
+循环插件列表的 key 和 value
+    插件配置 = {插件key, value} 的合并
+    判断是否在 lua/configure/plugins 中存在插件配置文件
+    如果存在
+        判断插件类型是否是 viml
+           是：
+                插件配置.setup = "插件配置文件中的 entrance 函数"
+           不是：
+               插件配置.setup = "插件配置文件中的 before 函数"
+               插件配置.config = "插件配置文件中的 load 函数 和 after 函数"
+    use(插件配置)
+```
+
+##### 插件配置文件
+viml 编写的插件配置文件模板是：  
+
+```
+local M = {}
+
+function M.entrance()
+    配置选项
+end
+
+return M
+```
+
+Lua 编写的插件配置文件模板是：  
+
+```
+local M = {}
+​
+function M.before() end
+
+function M.load()
+    local ok, m = pcall(require, "m")
+    if not ok then
+        return
+    end
+
+    M.m = m
+    M.m.setup({config})
+end
+
+function M.after() end
+
+return M
+```
+
+#### plugins.lua
+```
+-- 先导入 options 用户设置文件，后面可能会用到
+local options = require("core.options")
+local path = require("utils.api.path")
+​
+local packer_install_tbl = {
+    ["wbthomason/packer.nvim"] = {},
+}
+​
+-- 检查是否下载了 Packer，如果没有则自动下载
+Packer_bootstrap = (function()
+    local packer_install_path = path.join(vim.fn.stdpath("data"), "site/pack/packer/start/packer.nvim")
+    ---@diagnostic disable-next-line: missing-parameter
+    if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then
+        local rtp_addition = string.format("%s/site/pack/*/start/*", vim.fn.stdpath("data"))
+        vim.notify("Please wait ...\nInstalling packer package manager ...", "info", { title = "Packer" })
+        if not string.find(vim.o.runtimepath, rtp_addition) then
+            vim.o.runtimepath = string.format("%s,%s", rtp_addition, vim.o.runtimepath)
+        end
+        return vim.fn.system({
+            "git",
+            "clone",
+            "--depth",
+            "1",
+            "https://github.com/wbthomason/packer.nvim",
+            packer_install_path,
+        })
+    end
+end)()
+​
+local packer = require("packer")
+​
+-- 如果你访问 github 太慢，可以替换成镜像源
+packer.init({
+    git = {
+        -- For Chinese users, if the download is slow, you can switch to the github mirror source
+        -- replace : https://hub.fastgit.xyz/%s
+        default_url_format = "https://github.com/%s",
+    },
+})
+​
+packer.startup({
+    function(use)
+        for plug_name, plug_config in pairs(packer_install_tbl) do
+            -- 定义新的插件配置文件，其实就是将 key 和 value 合并了
+            local plug_options = vim.tbl_extend("force", { plug_name }, plug_config)
+​
+            -- 这里就是插件配置文件在磁盘中的路径，以 nv_ 开头，比如插件名称是 test_plugin
+            -- 那么它的配置文件名称就是 nv_test_plugin.lua，注意是全小写的
+            local plug_filename = plug_options.as or string.match(plug_name, "/([%w-_]+).?")
+            local load_disk_path = path.join("configure", "plugins", string.format("nv_%s", plug_filename:lower()))
+            local file_disk_path = path.join(vim.fn.stdpath("config"), "lua", string.format("%s.lua", load_disk_path))
+​
+            -- 查看磁盘中该文件是否存在
+            if path.is_exists(file_disk_path) then
+                -- 判断插件类型
+                if plug_config.ptp == "viml" then
+                    plug_options.setup = string.format("require('%s').entrance()", load_disk_path)
+                else
+                    plug_options.setup = string.format("require('%s').before()", load_disk_path)
+                    plug_options.config = string.format(
+                        [[
+                        require('%s').load()
+                        require('%s').after()
+                        ]],
+                        load_disk_path,
+                        load_disk_path
+                    )
+                end
+            end
+            use(plug_options)
+        end
+        if Packer_bootstrap then
+            -- 第一次打开 neovim 时自动下载插件
+            packer.sync()
+        end
+    end,
+    -- 使用浮动窗口预览 packer 中插件的下载信息
+    config = { display = { open_fn = require("packer.util").float } },
+})
+​
+-- 创建一个自动命令，如果该文件被更改，则重新生成编译文件
+local packer_user_config = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+​
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "plugins.lua" },
+    callback = function()
+        vim.cmd("source <afile>")
+        vim.cmd("PackerCompile")
+        vim.pretty_print("Recompile plugins successify...")
+    end,
+    group = packer_user_config,
+})
+​
+return packer
+```
