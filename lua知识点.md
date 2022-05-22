@@ -42,5 +42,15 @@ end
 #### vim.fn
 > 作用与vim.call()一样，调用函数  
 
-### 布尔值
-> bool只有两个可选值：false和true。lua把false和nil看作是false，其他的都是true，数字0也是true
+#### 布尔值
+> bool只有两个可选值：false和true。lua把false和nil看作是false，其他的都是true，数字0也是true  
+
+#### 三元表达式
+语法  
+> 条件 and 真 or 假  
+```
+local name = "hello"
+local result = name == "hello" and "I know you" or "I don't know you"
+print(result)
+-- I know you
+```
