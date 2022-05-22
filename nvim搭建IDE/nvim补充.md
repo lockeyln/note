@@ -242,7 +242,7 @@ Lua 编写的插件配置文件模板是：
 
 ```
 local M = {}
-​
+
 function M.before() end
 
 function M.load()
@@ -265,11 +265,11 @@ return M
 -- 先导入 options 用户设置文件，后面可能会用到
 local options = require("core.options")
 local path = require("utils.api.path")
-​
+
 local packer_install_tbl = {
     ["wbthomason/packer.nvim"] = {},
 }
-​
+
 -- 检查是否下载了 Packer，如果没有则自动下载
 Packer_bootstrap = (function()
     local packer_install_path = path.join(vim.fn.stdpath("data"), "site/pack/packer/start/packer.nvim")
@@ -290,9 +290,9 @@ Packer_bootstrap = (function()
         })
     end
 end)()
-​
+
 local packer = require("packer")
-​
+
 -- 如果你访问 github 太慢，可以替换成镜像源
 packer.init({
     git = {
@@ -301,19 +301,19 @@ packer.init({
         default_url_format = "https://github.com/%s",
     },
 })
-​
+
 packer.startup({
     function(use)
         for plug_name, plug_config in pairs(packer_install_tbl) do
             -- 定义新的插件配置文件，其实就是将 key 和 value 合并了
             local plug_options = vim.tbl_extend("force", { plug_name }, plug_config)
-​
+
             -- 这里就是插件配置文件在磁盘中的路径，以 nv_ 开头，比如插件名称是 test_plugin
             -- 那么它的配置文件名称就是 nv_test_plugin.lua，注意是全小写的
             local plug_filename = plug_options.as or string.match(plug_name, "/([%w-_]+).?")
             local load_disk_path = path.join("configure", "plugins", string.format("nv_%s", plug_filename:lower()))
             local file_disk_path = path.join(vim.fn.stdpath("config"), "lua", string.format("%s.lua", load_disk_path))
-​
+
             -- 查看磁盘中该文件是否存在
             if path.is_exists(file_disk_path) then
                 -- 判断插件类型
@@ -341,10 +341,10 @@ packer.startup({
     -- 使用浮动窗口预览 packer 中插件的下载信息
     config = { display = { open_fn = require("packer.util").float } },
 })
-​
+
 -- 创建一个自动命令，如果该文件被更改，则重新生成编译文件
 local packer_user_config = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
-​
+
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "plugins.lua" },
     callback = function()
@@ -354,6 +354,39 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     end,
     group = packer_user_config,
 })
-​
+
 return packer
+```
+##### 安装第一个插件
+在 plugins.lua 的 packer_install_tbl 表中添加以下代码，我将它归类到了代码编辑插件类中，该插件会在进入插入模式后加载：  
+```
+local packer_install_tbl = {
+    ["wbthomason/packer.nvim"] = {},
+     ----------- Code Editor -----------
+    ["windwp/nvim-autopairs"] = { -- autocomplete parentheses
+        event = { "InsertEnter" },
+    },
+}
+```
+在 configure/plugins 目录中新建 nvim-autopairs.lua 文件，填入以下配置： 
+```
+-- https://github.com/windwp/nvim-autopairs
+​
+local M = {}
+​
+function M.before() end
+​
+function M.load()
+    local ok, m = pcall(require, "nvim-autopairs")
+    if not ok then
+        return
+    end
+​
+    M.nvim_autopairs = m
+    M.nvim_autopairs.setup()
+end
+​
+function M.after() end
+​
+return M
 ```
