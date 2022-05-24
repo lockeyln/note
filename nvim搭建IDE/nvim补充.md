@@ -8,14 +8,14 @@
 ```
 -- neovim 与系统剪切板交互的必要插件
 $ yay -S xsel
-​
+
 -- 语法树解析
 $ yay -S tree-sitter
-​
+
 -- 模糊查找
 $ yay -S fd
 $ yay -S repgrep
-​
+
 -- Lua 代码格式化
 $ yay -S stylua
 ```
@@ -61,7 +61,7 @@ packer 是一款由 Lua 语言编写的 neovim 插件管理器。
 return require("packer").startup(function()
     -- 第一个插件
     use "wbthomason/packer.nvim"
-​
+
     -- 第二个插件
     use {
             "askfiy/nvim-picgo",   -- 插件地址
@@ -75,7 +75,7 @@ return require("packer").startup(function()
                 print("load ..")
             end
     }
-​
+
     -- 第三个插件
     use {
          "nvim-treesitter/nvim-treesitter",
@@ -371,22 +371,72 @@ local packer_install_tbl = {
 在 configure/plugins 目录中新建 nvim-autopairs.lua 文件，填入以下配置： 
 ```
 -- https://github.com/windwp/nvim-autopairs
-​
+
 local M = {}
-​
+
 function M.before() end
-​
+
 function M.load()
     local ok, m = pcall(require, "nvim-autopairs")
     if not ok then
         return
     end
-​
+
     M.nvim_autopairs = m
     M.nvim_autopairs.setup()
 end
-​
+
 function M.after() end
-​
+
 return M
 ```
+--- 
+#### LSP
+
+- plenary.nvim 是 null-ls 以及其后面其它安装的某些插件的依赖插件。
+- nvim-lspconfig 是 LSP 基础插件，我们需要通过该插件来配置 neovim 内置 LSP 客户端如何与 LSP 服务器端通信。
+- null-ls 插件能够提供一些基于第三方工具的代码诊断、格式化等操作。诸如 eslint、prettier、pylint 等都可以通过该插件非常简单的进行配置并生效。
+- nvim-lsp-installer 是一款自动下载 LSP 服务器的插件，通过它能够让我们免去一些 LSP 服务器繁琐的安装步骤。通常，它依赖 git、npm 等一些外部的包管理器命令。
+- fidget.nvim 能够提示目前 LSP 服务器的工作状态。当我们打开一个文件时，LSP 服务器通常必须要分析完整个工作区域后才能正常工作，这需要花费一些时间来完成，而通过 fidget.nvim 插件我们可以很直观的看到 LSP 服务器还需多久才能做完准备工作。
+- nvim-lightbulb 插件在 LSP 的代码操作可用时会在行号列中显示一个小灯泡.我们可以通过特定的函数调用代码操作。代码操作通常提供了一些 vsc 中快速修复的功能，如导入模块、忽略错误等等 ...
+
+##### 流程
+
+LSP 的配置比较繁琐，首先我们可以将整个配置分为 3 个步骤：
+- 下载 LSP 服务器
+- 配置 LSP 客户端如何与 LSP 服务端交互
+- 启动 LSP 服务器
+
+> nvim-lspconfig 将所有默认配置存放在了 ~/.local/share/nvim/site/pack/packer/start/lua/lspconfig/server_configurations 目录下，所以你可以直接用以下命令查看到默认的 sumneko_lua 配置文件：  
+
+lua.lua为例:
+```
+local util = require 'lspconfig.util'
+​
+local root_files = {
+  '.luarc.json',
+  '.luacheckrc',
+  '.stylua.toml',
+  'selene.toml',
+}
+return {
+  default_config = {
+    cmd = { 'lua-language-server' },
+    filetypes = { 'lua' },
+    root_dir = function(fname)
+      return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
+    end,
+    single_file_support = true,
+    log_level = vim.lsp.protocol.MessageType.Warning,
+    settings = { Lua = { telemetry = { enable = false } } },
+  },
+  docs = {
+    default_config = {
+      root_dir = [[root_pattern(".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git")]],
+    },
+  },
+}
+```
+注意！当你自己的配置文件中没有上面这些选项时，它将使用上面所展示的默认选项。  
+- cmd ： 这是一个 table，可以携带参数。必须确保 table 索引 1 处的命令是可执行的，如果不可执行，那么证明该 LSP 服务器是不能启动的。
+- filetypes ： 当匹配到这些文件类型时，LSP 服务器才会进入准备启动的状态。
