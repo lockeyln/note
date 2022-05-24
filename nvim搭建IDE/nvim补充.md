@@ -407,12 +407,11 @@ LSP 的配置比较繁琐，首先我们可以将整个配置分为 3 个步骤�
 - 配置 LSP 客户端如何与 LSP 服务端交互
 - 启动 LSP 服务器
 
-> nvim-lspconfig 将所有默认配置存放在了 ~/.local/share/nvim/site/pack/packer/start/lua/lspconfig/server_configurations 目录下，所以你可以直接用以下命令查看到默认的 sumneko_lua 配置文件：  
+> nvim-lspconfig 将所有默认配置存放在了 ~/.local/share/nvim/site/pack/packer/start/lua/lspconfig/server_configurations 目录下，所以可以直接用以下命令查看到默认的 sumneko_lua 配置文件：  
 
-lua.lua为例:
 ```
 local util = require 'lspconfig.util'
-​
+
 local root_files = {
   '.luarc.json',
   '.luacheckrc',
