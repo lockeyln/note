@@ -281,3 +281,7 @@ Fcitx 5 默认的外观比较朴素，用户可以根据喜好使用自定义主
 检查包依赖关系，卸载 ibus 包后会自动移除 ibus-data、ibus-gtk4、python3-ibus-1.0 三个包，似乎都只是与 iBus 紧密联系的。暂为不解之谜。
 
 -　Fcitx5中全角半角切换Ctrl+.
+
+---
+#### 安装stylua
+> cargo install stylua
