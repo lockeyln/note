@@ -285,3 +285,6 @@ Fcitx 5 默认的外观比较朴素，用户可以根据喜好使用自定义主
 ---
 #### 安装stylua
 > cargo install stylua
+
+#### zsh执行make
+> make TARGET=zsh
