@@ -127,58 +127,65 @@ obj.f2()
 ```
 ---
 
-基础
-注释
+### 基础
+#### 注释
 Lua 的行注释是 --，块注释是 --[[]]，如下示例：
-
+```
 -- Only one line
-​
-​
+
 --[[
     Can be multiple lines
 ]]
-赋值
-Lua 的赋值和其它动态编程语言类似，比如：
+```
 
+#### 赋值
+Lua 的赋值和其它动态编程语言类似，比如：
+```
 local num = 1
 local str = "123"
+```
 也可以先定义后赋值，在赋值之前该变量的值 为 nil。
-
+```
 local x
-​
-print(x) -- nil
-​
-x = 1
-​
-print(x) -- 1
-也可以支持平行赋值：
 
+print(x) -- nil
+
+x = 1
+
+print(x) -- 1
+```
+也可以支持平行赋值：
+```
 local a, b, c = 1, 2, 3
-​
+
 print(a, b, c) -- 1 2 3
-nil
+```
+#### nil
+```
 nil 相当于 null 或者 None。
 
 nil 永远是 false。
 
 对 nil 做类型比较时，应该加上双引号，否则将返回 false。
-
+```
 local a = nil
-​
+
 print(a == nil) -- true
-​
+
 -- 示意： type 返回类型
 print(type(a) == nil) -- false
-​
-print(type(a) == "nil") -- true
-数值
-Lua 数字只有一个 number 类型，无论浮点数还是整数：
 
+print(type(a) == "nil") -- true
+```
+#### 数值
+Lua 数字只有一个 number 类型，无论浮点数还是整数：
+```
 local a, b, c = 1, 2.0, 3
-​
+
 print(a, b, c) -- 1 2.0 3
 print(type(a), type(b), type(c)) -- number -- number -- number
-布尔值
+```
+#### 布尔值
 Lua 布尔值只有 true 和 false。
 
 0 等同于 true，此外任意的容器类型布尔结果都是 true，无论其是否含有元素。
