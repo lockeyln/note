@@ -11,7 +11,8 @@ git init --bare $HOME/.dotfiles
 2. 创建一个别名来管理您的点文件
 
 ```
-echo alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' >> ~/.bashrc
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' 
+echo "alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc
 ```  
 该别名将创建一个 dot 命令别名（您可以根据需要命名）， 该别名将以 /usr/bin/git 某种方式 调用 并将其存储在 ~/.bashrc 文件中，因此每次打开Bash时都会被加载。  
 - --git-dir=$HOME/.dotfiles/ ：无论您在何处调用该命令，它都将始终指向该特定目录。
