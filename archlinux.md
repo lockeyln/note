@@ -48,6 +48,14 @@ dot remote add origin git@github.com:username/reponame.git
 - 关联以后，推送 commit 就只需要输入 dot push
 ```
 dot push -u origin master
+```  
+有可能出现 ssh: connect to host github.com port 22: Connection refused 问题
+.ssh 目录下创建 config 文件，编辑内容为  
+
+```
+Host github.com
+Hostname ssh.github.com
+Port 443
 ```
 #### 在新系统上恢复 Dotfiles  
 ```
