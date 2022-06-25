@@ -49,3 +49,11 @@ dot remote add origin git@github.com:username/reponame.git
 ```
 dot push -u origin master
 ```
+#### 在新系统上恢复 Dotfiles  
+```
+git clone --bare git@github.com:username/reponame.git $HOME/.dot
+alias dot="git --git-dir=$HOME/.dot --work-tree=$HOME"
+dot config --local status.showUntrackedFiles no
+```  
+这一步可能会提示 「error: The following untracked working tree files would be overwritten by checkout:」，  
+按照 git 的说明移动或删除这些文件就行dot checkout
