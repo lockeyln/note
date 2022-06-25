@@ -25,3 +25,21 @@ echo "alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> 
 ```
 dot config --local status.showUntrackedFiles no
 ```
+获取未跟踪文件的列表  
+```
+dot status --untracked-files=normal
+```
+4. 添加提交
+```
+dot add .gitconfig
+dot commit -m Add .gitconfig
+dot add .vimrc
+dot commit -m Add .vimrc
+dot add .bashrc
+dot commit -m Add .bashrc
+```
+5. 添加远程  
+```
+dot remote add origin git@github.com:用户名/dotfiles.git
+dot push
+```
