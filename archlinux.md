@@ -5,7 +5,7 @@
 4. 生成fstab文件
 5. 切换新系统：arch-chroot /mnt
 6. 设置时间和区域
-7. 设置语言
+7. 本地化、设置语言
 8. 写入hostname
 9. 修改hosts
 10. passwd
