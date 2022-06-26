@@ -1,4 +1,16 @@
 ### win10安装双系统
+1. 利用iwctl进行无线网络
+2. 利用fdisk或cfdisk分区，mkfs格式化，mkdir创建目录,mount挂载到目录
+3. 安装基本系统
+4. 生成fstab文件
+5. 切换新系统：arch-chroot /mnt
+6. 设置时间和区域
+7. 设置语言
+8. 写入hostname
+9. 修改hosts
+10. passwd
+11. 安装基本软件
+12. 安装grub，配置grub
 
 ### [使用 Git Repo 方式管理 dotfiles](http://dotfiles.github.io/)
 #### 初始化
