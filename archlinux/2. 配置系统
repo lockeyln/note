@@ -1,0 +1,7 @@
+### 设置语言
+```
+打开：System Settings --> Regional Settings--> Language -->Add Languages				## 添加中文并拖到第一行
+再将：system Setting --> Regional Settings --> Formats                               ## 值设为：简体中文
+```
+
+### 设置DNS
