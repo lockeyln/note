@@ -1,6 +1,6 @@
 ### win10安装双系统
 1. 利用iwctl进行无线网络
-2. 利用fdisk或cfdisk分区，mkfs格式化，mkdir创建目录,mount挂载到目录
+2. 利用fdisk或cfdisk分区，mkfs格式化，mkdir创建目录,mount挂载到目录(如果双系统将原系统efi挂载到/mnt/boot)
 3. 安装基本系统
 4. 生成fstab文件
 5. 切换新系统：arch-chroot /mnt
