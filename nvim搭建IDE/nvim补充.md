@@ -457,3 +457,9 @@ return {
 - 循环所有已经配置的 LSP 服务器和配置文件
 - 判断 LSP 服务器是否下载，若没下载则自动下载，若已下载则启动服务
 - 绑定按键，将按键注册到当前缓冲区
+
+
+#### 安装 tree-sitter-cli
+```
+npm install tree-sister-cli
+```
