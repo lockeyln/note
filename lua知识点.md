@@ -211,6 +211,7 @@ print(string.len("123")) -- 3
 ```
 #### 表
 Lua 的表非常强大， 你可以用它定义数组或者映射。
+Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。
 ```
 如下所示：
 
@@ -569,5 +570,3 @@ print(str:lower()) -- hello
 print(str:len()) -- 5
 ```
 
-### 表table
-> Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。
