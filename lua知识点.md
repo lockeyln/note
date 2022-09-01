@@ -568,3 +568,6 @@ print(str:upper()) -- HELLO
 print(str:lower()) -- hello
 print(str:len()) -- 5
 ```
+
+### 表table
+> Lua 中的表（table）其实是一个”关联数组”（associative arrays），数组的索引可以是数字或者是字符串。
