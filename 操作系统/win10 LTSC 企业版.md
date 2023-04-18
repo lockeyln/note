@@ -18,3 +18,6 @@
 - 在“变量名”中输入“NVIM_HOME”，在“变量值”中输入Neovim的安装路径，例如“C:\Program Files\Neovim”
 - 在“系统变量”中找到“Path”，点击“编辑”
 - 在弹出的窗口中，点击“新建”，输入“%NVIM_HOME%”，然后点击“确定”保存更改。
+
+### cfw
+- win10上记得关闭TUN模式
