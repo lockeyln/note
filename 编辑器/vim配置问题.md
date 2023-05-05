@@ -44,9 +44,17 @@ Vim编辑器允许定义自己的命令，我们可以像执行内置命令一�
 
 :command Delete_one -nargs=0 1delete
 
-默认情况下-nargs=0，所以可以省略。其他-nargs选项值如下：
+默认情况下-nargs=0，所以可以省略。
 
 在命令定义中，参数是由关键字<args>指定的：
 
 :command -nargs=+ Say :echo "<args>
+
+输入以下自定义命令：
+
+:Say Hello World
+
+命令的执行结果显示：
+
+Hello World
 ```
