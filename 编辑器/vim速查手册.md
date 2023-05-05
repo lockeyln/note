@@ -1,6 +1,11 @@
-[VIM中文用户手册](https://yianwillis.github.io/vimcdoc/doc/help.html)
+### 参考资料
 
-### Ctrl+C 等同于 ESC
+- [VIM中文用户手册](https://yianwillis.github.io/vimcdoc/doc/help.html)
+- [VIM教程](https://www.w3cschool.cn/vim/)
+- [VIM手册](https://vim.rtorr.com/lang/zh_cn)
+- [VIM学习笔记](http://yyq123.github.io/learn-vim/)
+
+`Ctrl+C 等同于 ESC`
 
 ### 字符级
 | 按键 | 功能 |
