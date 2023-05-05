@@ -5,7 +5,9 @@
   **注意：这里的"^[key"不是直接将符号打上去的，正确输入方式：在插入模式下，先按下 Crtl+v会出现^ ,后再按下 Alt+key（想设置的键）**
   
   
-## 符号$ & command!
+## 符号 & $ command!
+
+### 关于&
 
 ```
 :set textwidth=80
@@ -18,3 +20,33 @@
 :echo &wrap
 ```
 - Vim显示0
+
+### 关于$
+
+- 通过$变量名来引用环境变量
+
+### command!(自定义命令)
+
+```
+Vim编辑器允许定义自己的命令，我们可以像执行内置命令一样来执行我们自己定义的命令。
+
+使用以下:command命令自定义命令：
+
+:command Delete_first :1delete
+
+注意自定义命令的名称，必须以大写字母开头，而且不能包含下划线；如果我们执行:Delete_first自定义命令，那么Vim就会执行:1delete命令，从而删除第一行。
+
+可以使用!来强制重新定义同名的自定义命令：
+
+:command! -nargs=+ Say :echo <args>
+
+用户定义的命令可以指定一系列的参数，参数的个数由-nargs选项在命令行中指定。例如定义Delete_one命令没有参数：
+
+:command Delete_one -nargs=0 1delete
+
+默认情况下-nargs=0，所以可以省略。其他-nargs选项值如下：
+
+在命令定义中，参数是由关键字<args>指定的：
+
+:command -nargs=+ Say :echo "<args>
+```
