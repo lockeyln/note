@@ -159,6 +159,18 @@ feh --bg-fill --randomize /usr/share/backgrounds/archlinux/*
 xrandr -q
 ```
 
+**注意：如果使用xrandr -q查看的结果中没有符合自己显示的分辨率就需要自己创建一个**  
+
+```
+# 创建一个分辨率
+命令：cvt 1920 1080 60
+回显：xrandr --newmode ....
+# 用xrandr将回显添加到显示器上
+xrandr --addmode 显示器名称 "1920x1080_60.00"
+# 修改分辨率
+xrandr --output 显示器名称 --mode '分辨率'
+```
+
 2. 设置分辨率  
 
 ```
