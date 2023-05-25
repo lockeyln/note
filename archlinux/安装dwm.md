@@ -126,7 +126,7 @@ xwallpaper --zoom ~/.config/wall.png
 
 #### 音量调节  
 
-命令行安装pauseaudio，下列命令是几种对音量可能会做的操作：  
+命令行安装pulseaudio，下列命令是几种对音量可能会做的操作：  
 
 | Command | Action |
 | --- | --- |
