@@ -48,7 +48,7 @@ sudo make clean install
 
 这是由于当前处在KDE的wm已经在运行，无法打开dwm。这里需要为dwm编写启动选项，使得在登录时(login manager，Linux的一个软件)启动dwm而不启动KDE桌面环境。
 
-**/usr/share/xsessions目录下新建dwm.desktop
+**/usr/share/xsessions目录下新建dwm.desktop**
 
 ```
 [Desktop Entry]
