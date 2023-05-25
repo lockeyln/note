@@ -118,7 +118,7 @@ geek们的做法是使用命令行工具，下面是一些具体场景下的一�
 
 #### 设置壁纸   
 
-命令行安装xwallpeper，确定希望设置的图片路径，比如~/.config/wall.png  
+命令行安装xwallpaper，确定希望设置的图片路径，比如~/.config/wall.png  
 
 ```
 xwallpaper --zoom ~/.config/wall.png
