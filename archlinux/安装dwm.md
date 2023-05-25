@@ -104,7 +104,7 @@ dwm的区域分为如上几块，上面是状态栏，包括tags、title以及st
 | ALT+ENTER | 切换某当前window为master window |
 | ALT+m/t | 切换当前window为全屏/切换回来 |
 | ALT+n(1-9) | 进入tag n |
-| CTRL+SHIFT+PageUp/PageDown | zoom in/zoom out |
+| CTRL+SHIFT+PageUp/PageDown | 放大/缩小字号 |
 | ALT+b| toggle status bar |
 
 ### 其他设置  
@@ -122,7 +122,25 @@ geek们的做法是使用命令行工具，下面是一些具体场景下的一�
 
 ```
 xwallpaper --zoom ~/.config/wall.png
+或  
+feh --bg-fill --randomize /usr/share/backgrounds/archlinux/*
 ```  
+
+#### 修改分辨率
+
+1. 查看可用的显示器接口名和屏幕分辨率  
+
+```
+xrandr -q
+```
+
+2. 设置分辨率  
+
+```
+xrandr --output 显示器接口名 --mode 1920x1080 --rate 60.00
+```
+
+3. 写入xinitrc配置
 
 #### 音量调节  
 
