@@ -198,4 +198,11 @@ fade-out-step = 0.07;
 xsetroot -name "hello world"
 ```
 
-suckless官网列出了一些他人配置好的[dwm状态栏列表](https://dwm.suckless.org/status_monitor/)，可以参考选用。
+suckless官网列出了一些他人配置好的[dwm状态栏列表](https://dwm.suckless.org/status_monitor/)，可以参考选用。   
+
+### 其他用户的配置参考
+
+- [ohmyarch](https://github.com/guerbai/ohmyarch)
+- [DistroTube](https://gitlab.com/users/dwt1/projects)
+- [Luke Smith](https://github.com/LukeSmithxyz)
+- [TheNiceBoy](https://github.com/theniceboy)
