@@ -92,7 +92,7 @@ Type=Application
 dwm的区域分为如上几块，上面是状态栏，包括tags、title以及status；屏幕主要区域分为master与stack区域新打开的窗口会占据master，
 之前的窗口以栈的方式上下排列在stack区。
 
-#### dwm环境下的快捷键
+**dwm环境下的快捷键**
 
 | Keybinding | Action |
 | --- | --- |
@@ -107,3 +107,38 @@ dwm的区域分为如上几块，上面是状态栏，包括tags、title以及st
 | ALT+n(1-9) | 进入tag n |
 | CTRL+SHIFT+PageUp/PageDown | zoom in/zoom out |
 | ALT+b| toggle status bar |
+
+### 其他设置  
+
+dwm下鼠标几乎变得没有作用，在桌面环境中的点击音量按钮调节系统音量等操作变得不再可行，
+geek们的做法是使用命令行工具，下面是一些具体场景下的一种可行操作方式。
+
+#### 浏览图片
+
+> 命令行安装sxiv（Simple X Image Viewer），进入图片所在文件夹，输入：sxiv *，可以使用鼠标点击左右切换当前展示图片。
+
+#### 设置壁纸   
+
+> 命令行安装xwallpeper，确定希望设置的图片路径，比如~/.config/wall.png  
+
+```
+xwallpaper --zoom ~/.config/wall.png
+```  
+
+#### 音量调节  
+
+> 命令行安装pauseaudio，下列命令是几种对音量可能会做的操作：  
+
+| Command | Action |
+| --- | --- |
+| pactl set-sink-volume 0 +20% | 音量增加20% |
+| pactl set-sink-volume 0 -20% | 音量减少20% |
+| pactl set-sink-mute 0 toggle | 静音切换 |
+| pactl get-sink-volume 0 | 获取当前音量值 |  
+
+#### 截图 
+
+> 命令行安装scrot，打开dmenu输入scrotv即可对当前桌面截图保存在当前文件夹。
+
+若想截图特定窗口，可以加-s参数后用鼠标点击想要的窗口。其他具体指令的使用说明见scrot文档。  
+
