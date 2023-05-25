@@ -50,7 +50,7 @@ sudo make clean install
 
 3. 设置dwm启动项
 
-/usr/share/xsessions目录下新建dwm.desktop**
+/usr/share/xsessions目录下新建dwm.desktop
 
 ```
 [Desktop Entry]
