@@ -22,7 +22,6 @@ sudo pacman -S feh udisks2 udiskie pcmanfm git
 systemctl enable udisks2   #自动启动udisks2服务，可以使得文件管理系统(pcmanfm)能够自动识别U盘
 
 sudo pacman -S archlinux-wallpaper #下载一个壁纸包(可选)下载的壁纸在/usr/share/backgrounds/archlinux/
-
 ```
 
 2. 安装dwm，st，dmenu
