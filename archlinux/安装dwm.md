@@ -165,7 +165,7 @@ xrandr -q
 # 创建一个分辨率
 命令：cvt 1920 1080 60
 回显：xrandr --newmode ....
-# 用xrandr将回显添加到显示器上
+# 用xrandr将回显添加到显示器的分辨率列表中
 xrandr --addmode 显示器名称 "1920x1080_60.00"
 # 修改分辨率
 xrandr --output 显示器名称 --mode '分辨率'
