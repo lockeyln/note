@@ -190,6 +190,25 @@ fade-out-step = 0.07;
 
 除了alpha外，suckless还提供了其他许多的[patches](https://st.suckless.org/patches/)来扩充功能。  
 
+#### dmenu的想象力
+
+在path下的可执行文件均可被dmenu找到并运行，用户可以自行编写shell脚本置于/usr/local/bin文件夹下由dmenu执行。  
+
+比如实现一个关机/重启选项的简单例子：  
+
+```
+choices="shutdown\nreboot"
+
+chosen=$(echo -e "$choices" | dmenu -i -p "Operation:")
+
+case "$chosen" in
+    shutdown) shutdown;;
+    reboot) reboot;;
+esac
+```
+将该文件保存为sysop.sh置于PATH路径中，即可在dmenu中选择sysop这个选项并进行下一步选择。
+这个脚本本身没有太多实际意义，然而有了这样的机制，其实可以实现非常非常多的功能，比如调节音量、浏览切换壁纸、快速打开浏览器标签页等等，笔者认为其定制能力与想象力要比MacOS下的Alfred要更为丰富。
+
 #### dwm状态栏 
 
 默认的dwm状态栏非常朴素，status部分只显示了dwm-6.2，“没毛病老哥”们提供了一个基础的改变status显示内容的机制，比如想要把dwm-6.2改变为hello world那么需要运行：  
