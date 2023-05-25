@@ -65,6 +65,31 @@ Exec=/usr/local/bin/dwm
 Icon=
 Type=Application
 ```
+4. 配置xinintrc  
+
+- 将默认配置copy至家目录  
+
+```
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+```
+
+- 修改xinitrc配置  
+
+```
+#注释掉最后5行，并添加exec dwm
+#twm &
+#xclock -geometry 50x50-1+1 &
+#xterm -geometry 80x50+494+51 &
+#xterm -geometry 80x20+494-0 &
+#exec xterm -geometry 80x66+0+0 -name login
+
+#xrandr修改屏幕分辨率
+xrandr --output 显示器接口名 --mode 1920x1080 --rate 60.00 
+#设置桌面壁纸
+feh --bg-fill --randomize /usr/share/backgrounds/archlinux/* 
+#启动dwm
+exec dwm 
+```
 
 退出当前用户登录状态来到登录界面。左下角(其他发行版可能在其他位置)出现了选项，选择dwm后输入密码登录。
 
