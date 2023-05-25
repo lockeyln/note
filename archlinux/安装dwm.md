@@ -92,4 +92,18 @@ Type=Application
 dwm的区域分为如上几块，上面是状态栏，包括tags、title以及status；屏幕主要区域分为master与stack区域新打开的窗口会占据master，
 之前的窗口以栈的方式上下排列在stack区。
 
-### dwm环境下的快捷键
+#### dwm环境下的快捷键
+
+| Keybinding | Action |
+| --- | --- |
+| SHIFT+ALT+ENTER | 打开st |
+| SHIFT+ALT+q | 退出dwm，回到login manager |
+| ALT+p | 打开dmenu，之后可以输入软件名比如firefox来启动软件 |
+| ALT+j/k | 切换打开的多个window |
+| SHIFT+ALT+n(1-9) | 移动当前window至tag n(默认9个tags) |
+| SHIFT+ALT+c | 关闭当前window |
+| ALT+ENTER | 切换某当前window为master window |
+| ALT+m/t | 切换当前window为全屏/切换回来 |
+| ALT+n(1-9) | 进入tag n |
+| CTRL+SHIFT+PageUp/PageDown | zoom in/zoom out |
+| ALT+b| toggle status bar |
