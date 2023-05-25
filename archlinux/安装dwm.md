@@ -115,11 +115,11 @@ geek们的做法是使用命令行工具，下面是一些具体场景下的一�
 
 #### 浏览图片
 
-> 命令行安装sxiv（Simple X Image Viewer），进入图片所在文件夹，输入：sxiv *，可以使用鼠标点击左右切换当前展示图片。
+命令行安装sxiv（Simple X Image Viewer），进入图片所在文件夹，输入：sxiv *，可以使用鼠标点击左右切换当前展示图片。
 
 #### 设置壁纸   
 
-> 命令行安装xwallpeper，确定希望设置的图片路径，比如~/.config/wall.png  
+命令行安装xwallpeper，确定希望设置的图片路径，比如~/.config/wall.png  
 
 ```
 xwallpaper --zoom ~/.config/wall.png
@@ -127,7 +127,7 @@ xwallpaper --zoom ~/.config/wall.png
 
 #### 音量调节  
 
-> 命令行安装pauseaudio，下列命令是几种对音量可能会做的操作：  
+命令行安装pauseaudio，下列命令是几种对音量可能会做的操作：  
 
 | Command | Action |
 | --- | --- |
@@ -138,7 +138,64 @@ xwallpaper --zoom ~/.config/wall.png
 
 #### 截图 
 
-> 命令行安装scrot，打开dmenu输入scrotv即可对当前桌面截图保存在当前文件夹。
+命令行安装scrot，打开dmenu输入scrotv即可对当前桌面截图保存在当前文件夹。
 
 若想截图特定窗口，可以加-s参数后用鼠标点击想要的窗口。其他具体指令的使用说明见scrot文档。  
 
+#### 简单配置st
+
+st的实现只有2000多行C代码，自身的功能非常有限，以至于各种用户“习以为常”的能力它都没有，包括复制/粘贴、滚动等功能都是默认不支持的，毕竟"simple"。  
+
+**suckless的软件不提供配置文件，所有配置项均在其源码config.def.h中，修改后需要运行sudo cp config.def.h config.h && sudo make clean install重新编译安装。**  
+
+在~/st/config.def.h的ShortCut中新增两行：  
+
+```
+{ MODKEY, XK_c, clipcopy,  {.i=0}},
+{ MODKEY, XK_v, clippaste, {.i=0}},
+```
+重新安装，即可以在st中使用SHIFT+CTRL+c/v来实现复制/粘贴功能。
+
+#### emoji
+
+st自然也不支持emoji的显示，比如ohmyarch的README.md中有🤣，运行cat README.md会导致st直接crash掉，这里需要一个特定的依赖来解决此问题：  
+
+```
+yay -S libxft-bgra
+```
+
+#### 透明化
+
+设置了漂亮的壁纸后将终端做一定程度的透明化是一种视觉上的享受。
+
+命令行安装picom，配置文件写于~/.config/picom/picom.conf  
+
+```
+opacity-rule = [
+"90:class_g = 'st-256color'"
+];
+wintypes:
+{
+normal = { blur-background = true; };
+splash = { blur-background = false; };
+};
+# Fading
+fading = false;
+fade-in-step = 0.07;
+fade-out-step = 0.07;
+```
+然而st自身的源码不支持透明显示，suckless提供了一些patches来增强它的功能，类似于其他软件中的插件。    
+
+复制alpha patch diff至st源码目录内，运行patch < st-alpha-0.8.2.diff后依然是重新编译安装。然后运行picom -b即可实现透明效果。  
+
+除了alpha外，suckless还提供了其他许多的[patches](https://st.suckless.org/patches/)来扩充功能。  
+
+#### dwm状态栏 
+
+默认的dwm状态栏非常朴素，status部分只显示了dwm-6.2，“没毛病老哥”们提供了一个基础的改变status显示内容的机制，比如想要把dwm-6.2改变为hello world那么需要运行：  
+
+```
+xsetroot -name "hello world"
+```
+
+suckless官网列出了一些他人配置好的[dwm状态栏列表](https://dwm.suckless.org/status_monitor/)，可以参考选用。
