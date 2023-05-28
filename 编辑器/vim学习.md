@@ -1,3 +1,13 @@
+### 参考资料
+
+- [VIM中文用户手册](https://yianwillis.github.io/vimcdoc/doc/help.html)
+- [VIM教程](https://www.w3cschool.cn/vim/)
+- [VIM手册](https://vim.rtorr.com/lang/zh_cn)
+- [VIM学习笔记](http://yyq123.github.io/learn-vim/)
+- [笨办法学vimscript](https://www.kancloud.cn/kancloud/learn-vimscript-the-hard-way/49321)
+
+`Ctrl+C 等同于 ESC`
+
 ## 基础
 
 | text objcet | 说明 |
