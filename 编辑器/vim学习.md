@@ -13,7 +13,7 @@
 | text objcet | 说明 |
 | --- | --- |
 | 名词 | w=word，s=sentence，p=paragraph，t=tag，单引号，双引号，小括号，中括号，大括号 |
-| 动词 | y=yank，p=paste，d=delete，c=change， v=view模式 |
+| 动词 | y=yank，p=paste，d=delete，c=change， v=visual模式 |
 | 范围 | i=inner a=a或around |
 | 量词 | 数字 |
 
