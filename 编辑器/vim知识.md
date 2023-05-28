@@ -1,13 +1,27 @@
-## Vim中无法用Alt键来映射
+- vim名词  
+
+`w=word s=sentence p=paragraph t=tag 单引号 双引号 小括号 中括号 大括号`
+
+- vim动词  
+
+`y=yank p=paste d=delete c=change`
+
+- vim范围
+
+`i=inner a=a或around`
+
+---
+
+### Vim中无法用Alt键来映射
 
   > Alt+key（<A+key>)的格式设置不成功，将"<A+key>“的输入格式改为”^[key"
 
   **注意：这里的"^[key"不是直接将符号打上去的，正确输入方式：在插入模式下，先按下 Crtl+v会出现^ ,后再按下 Alt+key（想设置的键）**
   
   
-## 符号 & $ command!
+### 符号 & $ command!
 
-### 关于&
+#### 关于&
 
 ```
 :set textwidth=80
@@ -21,11 +35,11 @@
 ```
 - Vim显示0
 
-### 关于$
+#### 关于$
 
 - 通过$变量名来引用环境变量
 
-### command!(自定义命令)
+#### command!(自定义命令)
 
 ```
 Vim编辑器允许定义自己的命令，我们可以像执行内置命令一样来执行我们自己定义的命令。
