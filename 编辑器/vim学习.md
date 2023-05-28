@@ -1,16 +1,14 @@
-- vim名词  
+## 基础
 
-`w=word s=sentence p=paragraph t=tag 单引号 双引号 小括号 中括号 大括号`
+| text objcet | 说明 |
+| --- | --- |
+| 名词 | w=word，s=sentence，p=paragraph，t=tag，单引号，双引号，小括号，中括号，大括号 |
+| 动词 | y=yank，p=paste，d=delete，c=change |
+| 范围 | i=inner a=a或around |
+| 量词 | 数字 |
 
-- vim动词  
 
-`y=yank p=paste d=delete c=change`
-
-- vim范围
-
-`i=inner a=a或around`
-
----
+## 配置相关
 
 ### Vim中无法用Alt键来映射
 
