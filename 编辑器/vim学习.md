@@ -79,3 +79,8 @@ Vim编辑器允许定义自己的命令，我们可以像执行内置命令一�
 
 Hello World
 ```
+### 技巧篇
+
+- 暂时离开buffer到终端再回vim：
+  1. Ctrl+z挂起vim到终端执行完任务再fg回到vim
+  2. vim中使用命令模式下!command执行外部命令，按Enter键回到vim
