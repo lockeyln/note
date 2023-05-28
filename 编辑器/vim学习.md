@@ -2,6 +2,7 @@
 
 - [VIM中文用户手册](https://yianwillis.github.io/vimcdoc/doc/help.html)
 - [VIM教程](https://www.w3cschool.cn/vim/)
+- [Vim Cheat Sheet](https://vim.rtorr.com/lang/zh_cn)
 - [VIM手册](https://vim.rtorr.com/lang/zh_cn)
 - [VIM学习笔记](http://yyq123.github.io/learn-vim/)
 - [笨办法学vimscript](https://www.kancloud.cn/kancloud/learn-vimscript-the-hard-way/49321)
@@ -22,32 +23,30 @@
 
 ### Vim中无法用Alt键来映射
 
-  > Alt+key（<A+key>)的格式设置不成功，将"<A+key>“的输入格式改为”^[key"
+  `Alt+key（<A+key>)的格式设置不成功，将"<A+key>“的输入格式改为”^[key"`
 
-  **注意：这里的"^[key"不是直接将符号打上去的，正确输入方式：在插入模式下，先按下 Crtl+v会出现^ ,后再按下 Alt+key（想设置的键）**
+  注意：这里的"^\[key"不是直接将符号打上去的，正确输入方式：在插入模式下，先按下 Crtl+v会出现^ ,后再按下 Alt+key（想设置的键）
   
   
-### 符号 & $ command!
+### 关于符号 & $ 和
 
-#### 关于&
+1. 关于符号&：&变量 表示vim选项,而不是普通的变量。
 
 ```
 :set textwidth=80
 :echo &textwidth
 ```
-- Vim会显示80。在名称的前面加一个&符号是告诉Vim你正在引用这个选项，而不是在使用一个名称刚好相同的变量。
+- 显示80
 
 ```
 :set nowrap
 :echo &wrap
 ```
-- Vim显示0
+- 显示0
 
-#### 关于$
+2. 关于符号$：$变量 表示环境变量
 
-- 通过$变量名来引用环境变量
-
-#### command!(自定义命令)
+### command!(自定义命令)
 
 ```
 Vim编辑器允许定义自己的命令，我们可以像执行内置命令一样来执行我们自己定义的命令。
@@ -56,7 +55,7 @@ Vim编辑器允许定义自己的命令，我们可以像执行内置命令一�
 
 :command Delete_first :1delete
 
-注意自定义命令的名称，必须以大写字母开头，而且不能包含下划线；如果我们执行:Delete_first自定义命令，那么Vim就会执行:1delete命令，从而删除第一行。
+注意自定义命令的名称，必须以大写字母开头；如果我们执行:Delete_first自定义命令，那么Vim就会执行:1delete命令，从而删除第一行。
 
 可以使用!来强制重新定义同名的自定义命令：
 
