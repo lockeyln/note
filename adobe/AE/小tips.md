@@ -53,3 +53,7 @@
 	1. Ctrl+F12呼出控制台 
 	2. 点击右侧三个横线弹出菜单中选择：勾选 debug database view
 	3. 找到【AdobeCleanFontSize】，并将其参数进行调整，重启AE
+
+- PS文字层转化为AE文字图层
+
+右击导入的PS合成的文字图层-创建-转换为可编辑文字
