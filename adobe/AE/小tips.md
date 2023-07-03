@@ -1,3 +1,4 @@
+[快捷键查询](https://zhuanlan.zhihu.com/p/225637774)
 
 ## 快捷键
 
